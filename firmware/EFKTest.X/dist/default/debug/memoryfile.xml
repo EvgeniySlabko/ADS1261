@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<project>                                  
+  <executable name="dist/default/debug/EFKTest.X.debug.elf">                 
+    <memory name="program">                 
+      <units>bytes</units>                 
+      <length>1049728</length>                 
+      <used>18988</used>                     
+      <free>1030740</free>                     
+    </memory>                              
+    <memory name="data">              
+      <units>bytes</units>                 
+      <length>263040</length>                 
+      <used>5008</used>                     
+      <free>258032</free>                     
+    </memory>                              
+  </executable>                            
+</project>                                 
