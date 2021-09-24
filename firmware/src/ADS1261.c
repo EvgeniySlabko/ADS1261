@@ -151,7 +151,7 @@ bool WriteRegisterByte(DRV_HANDLE spiHandle, uint8_t address, uint8_t data)
 uint8_t ReadRegisterByte(DRV_HANDLE spiHandle, uint8_t address, uint8_t *data)
 {
     DelayInMillisecond(1);
-    CS_PIN = 0;
+    //CS_PIN = 0;
     Delay50ns();
     
     //uint8_t data1 = 0b00000001; //data reg
@@ -237,41 +237,63 @@ void Reset(DRV_HANDLE spiHandle)
     DelayInMillisecond(1);
 }
 
-uint32_t ReadData(DRV_HANDLE spiHandle, uint8_t *status)
+void TransmitComplit(DRV_SPI_BUFFER_EVENT event, DRV_SPI_BUFFER_HANDLE bufferHandle, void * context )
 {
-    DelayInMillisecond(1);
+    GREEN = 1;
+    RED = 0;
+    CS_PIN = 1;
+}
+
+
+void TransmitComplit2(DRV_SPI_BUFFER_EVENT event, DRV_SPI_BUFFER_HANDLE bufferHandle, void * context )
+{
+    GREEN = 0;
+    RED = 1;
+}
+uint32_t ReadData(DRV_HANDLE spiHandle)
+{
     CS_PIN = 0;
-    Delay50ns();
+    uint8_t dataBuf[5];
+    uint8_t resultBuf[6];  
     
-    uint32_t result = 0;
+    dataBuf[0] = 0x12; 
+    dataBuf[1] = 0x00;
+    dataBuf[2] = 0x00;
+    dataBuf[3] = 0x00;
+    dataBuf[4] = 0x00;
+    dataBuf[5] = 0x00;
     
-    uint8_t operation = 0x12;
+    uint32_t operation = 0x5555;
     uint8_t nop = 0x00;
     
-    uint8_t ffByte; // Must be 0xFF
+    uint32_t ffByte; // Must be 0xFF
     uint8_t echoByte1; // Echo for operation
-    uint8_t statusByte; // Status
     
     uint8_t dataByte1;
     uint8_t dataByte2;
     uint8_t dataByte3;
-    DRV_SPI_BufferAddWriteRead2(spiHandle, &operation, 1, &ffByte, 1, 0, 0, 0);     
-    DRV_SPI_BufferAddWriteRead2(spiHandle, &nop, 1, &echoByte1, 1, 0, 0, 0);
+    DRV_SPI_BufferAddWriteRead2(spiHandle, dataBuf, 3, resultBuf, 3, TransmitComplit2, 0, 0); 
+    //DRV_SPI_BufferAddWriteRead2(spiHandle, &dataBuf[4], 1, &resultBuf[4], 1, TransmitComplit, 0, 0); 
+    //GREEN = 0;
+    //RED = 1;
+         
+    //DRV_SPI_BufferAddWriteRead2(spiHandle, &nop, 4, &echoByte1, 4, 0, 0, 0);
+    Delay20ns();
     
-    DRV_SPI_BufferAddWriteRead2(spiHandle, &nop, 1, &dataByte1, 1, 0, 0, 0);
-    result += dataByte1;
-    result = result << 8;
+    //DRV_SPI_BufferAddWriteRead2(spiHandle, &nop, 4, &dataByte1, 4, 0, 0, 0);
+    //result += dataByte1;
+    //result = result << 8;
     
-    DRV_SPI_BufferAddWriteRead2(spiHandle, &nop, 1, &dataByte2, 1, 0, 0, 0);
-    result += dataByte2;
-    result = result << 8;
+//    DRV_SPI_BufferAddWriteRead2(spiHandle, &nop, 4, &dataByte2, 4, 0, 0, 0);
+//    result += dataByte2;
+//    result = result << 8;
+//    
+//    DRV_SPI_BufferAddWriteRead2(spiHandle, &nop, 4, &dataByte3, 4, 0, 0, 0);
+//    result += dataByte3;
+//       
+//    DelayInMillisecond(1);
+//    CS_PIN = 1;
+//    DelayInMillisecond(1);
     
-    DRV_SPI_BufferAddWriteRead2(spiHandle, &nop, 1, &dataByte3, 1, 0, 0, 0);
-    result += dataByte3;
-       
-    DelayInMillisecond(1);
-    CS_PIN = 1;
-    DelayInMillisecond(1);
-    
-    return result;
+    return 0;
 }

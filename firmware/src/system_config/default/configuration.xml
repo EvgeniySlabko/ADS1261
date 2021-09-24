@@ -191,7 +191,7 @@
       <Template dnOrder="11">
         <Name dnOrder="0">drv_spi_tasks.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/driver/spi/dynamic</Path>
-        <Checksum dnOrder="2">5CADE4D5A23EE24A7F108EF6D3A0B9B6</Checksum>
+        <Checksum dnOrder="2">C1D8830369BFB00038259C9292C3856D</Checksum>
       </Template>
       <Template dnOrder="12">
         <Name dnOrder="0">sys_devcon_cache_pic32mz.S</Name>
@@ -216,7 +216,7 @@
       <Template dnOrder="16">
         <Name dnOrder="0">system_config.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">BC081F8940D71FD9929EC6FC51933CE5</Checksum>
+        <Checksum dnOrder="2">5BE155BA6B7B295C522F6F860A4E6649</Checksum>
       </Template>
       <Template dnOrder="17">
         <Name dnOrder="0">app.h</Name>
@@ -233,7 +233,7 @@
       <Template dnOrder="19">
         <Name dnOrder="0">drv_spi_master_ebm_tasks.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/driver/spi/dynamic</Path>
-        <Checksum dnOrder="2">402393846E284854DF5D60D8E5DF7390</Checksum>
+        <Checksum dnOrder="2">1CDDAF11C63A12C4381A1459ED494C9B</Checksum>
       </Template>
       <Template dnOrder="20">
         <Name dnOrder="0">sys_clk_pic32mz.c</Name>
@@ -243,7 +243,7 @@
       <Template dnOrder="21">
         <Name dnOrder="0">drv_spi_api.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/driver/spi/dynamic</Path>
-        <Checksum dnOrder="2">BEE81E0BE722B2EDC4C0271454A54B9A</Checksum>
+        <Checksum dnOrder="2">3AD4564D66F31C9CBD2D46A2914AC965</Checksum>
       </Template>
     </Templates>
     <CompilerItems dnOrder="2">

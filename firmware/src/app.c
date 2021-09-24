@@ -174,17 +174,20 @@ void APP_Tasks ( void )
         case APP_STATE_SERVICE_TASKS:
         {
             int j;
-
-            ReadRegisterByte(appData.handleSPI0, STATUS_ADDR, &status);
-                                
-            for (j = 0; j < 20; j++)
-            {
-                DelayInMillisecond(50);
-                uint8_t currentStatus;
-                uint32_t data = ReadData(appData.handleSPI0, &currentStatus);
-                statusArray[j] = currentStatus;
-                dataArr[j] = data;
-            }
+            uint8_t data;
+            
+            //ReadRegisterByte(appData.handleSPI0, STATUS_ADDR, );
+            //ReadRegisterByte(appData.handleSPI0, uint8_t address, uint8_t *data)
+            ReadData(appData.handleSPI0, &data);
+           
+//            for (j = 0; j < 20; j++)
+//            {
+//                DelayInMillisecond(50);
+//                uint8_t currentStatus;
+//                uint32_t data = ReadData(appData.handleSPI0, &currentStatus);
+//                statusArray[j] = currentStatus;
+//                dataArr[j] = data;
+//            }
             
         }
         /* TODO: implement your application state machine.*/

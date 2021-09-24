@@ -194,7 +194,9 @@ build/default/production/_ext/1688732426/system_interrupt.o: \
  ../../../../framework/peripheral/spi/processor/../templates/spi_AudioProtocolMode_Default.h \
  ../../../../framework/peripheral/spi/processor/../templates/spi_Buffer32bit_Default.h \
  ../../../../framework/peripheral/spi/processor/../templates/spi_Buffer16bit_Default.h \
- ../src/system_config/default/system_definitions.h ../src/Delay.h
+ ../src/system_config/default/system_definitions.h ../src/Delay.h \
+ ../src/system_config/default/../default/../../ADS1261.h \
+ ../../../../framework/driver/driver.h
 
 ../../../../framework/system/common/sys_common.h:
 
@@ -589,3 +591,7 @@ build/default/production/_ext/1688732426/system_interrupt.o: \
 ../src/system_config/default/system_definitions.h:
 
 ../src/Delay.h:
+
+../src/system_config/default/../default/../../ADS1261.h:
+
+../../../../framework/driver/driver.h:

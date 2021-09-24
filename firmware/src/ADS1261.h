@@ -132,7 +132,6 @@ bool WriteRegisterByte(DRV_HANDLE spiHandle, uint8_t address, uint8_t data);
 void Start(DRV_HANDLE spiHandle);
 void Stop(DRV_HANDLE spiHandle);
 void Reset(DRV_HANDLE spiHandle);
-uint32_t ReadData(DRV_HANDLE spiHandle, uint8_t *status);
 //DataRate
 #define DR1 0b00000  // 2.5 SPS
 #define DR2 0b00001  // 5 SPS

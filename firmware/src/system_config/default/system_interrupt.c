@@ -63,6 +63,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "app.h"
 #include "system_definitions.h"
 #include "Delay.h"
+#include "../default/../../ADS1261.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -73,16 +74,17 @@ bool green = true;
 void __ISR(_EXTERNAL_2_VECTOR, IPL1AUTO) _IntHandlerExternalInterruptInstance0(void)
 {
     PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_EXTERNAL_2);
-    if (green)
-    {
-        green = false;
-        GREEN = 0;
-    }
-    else
-    {
-        green = true;
-        GREEN = 1;
-    }
+    
+//    if (green)
+//    {
+//        green = false;
+//        GREEN = 0;
+//    }
+//    else
+//    {
+//        green = true;
+//        GREEN = 1;
+//    }
 }
  
 
