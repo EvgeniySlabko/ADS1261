@@ -56,6 +56,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "app.h"
 #include "ADS1261.h"
 #include "Delay.h"
+#include "ADSDriver.h"
 
 // *****************************************************************************
 /* Application Data
@@ -75,9 +76,11 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 APP_DATA appData;
 
 uint32_t statusArray[256];
-uint32_t dataArr[256];
+uint32_t dataArr[300];
 uint8_t i = 0;
+uint8_t j = 0;
 uint8_t status;
+DRV_HANDLE ads_handle;
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Callback Functions
@@ -119,6 +122,9 @@ void APP_Initialize ( void )
 
     appData.handleSPI0 = DRV_HANDLE_INVALID;
     
+    //DRV_HANDLE ADSHandle = GetInstance();
+    //Deinitialize(ADSHandle);
+            
     /* TODO: Initialize your application's state machine and other
      * parameters.
      */
@@ -158,36 +164,47 @@ void APP_Tasks ( void )
                 appData.state = APP_STATE_SERVICE_TASKS;
             }
             
+            DelayInMillisecond(100);
+            ads_handle = Init_ADS1261(appData.handleSPI0, &LATD, (uint32_t)0b1000000000000);
+            //DelayInMillisecond(100);
+            //SetOffset(ads_handle, 0xFFFFFF);
+            //Stop(appData.handleSPI0);
+            //Reset(appData.handleSPI0);
+            //DelayInMillisecond(1000);
             
-            Stop(appData.handleSPI0);
-            Reset(appData.handleSPI0);
-            DelayInMillisecond(1000);
-            
-            Init_ADS1261(appData.handleSPI0);
+            //Init_ADS1261(appData.handleSPI0);
 
             //DelayInMillisecond(1000);
- 
-            Start(appData.handleSPI0);  
+            
+            //Start(appData.handleSPI0);  
+            //Reset(ads_handle);
             break;
         }
 
         case APP_STATE_SERVICE_TASKS:
         {
-            int j;
-            uint8_t data;
             
+            //uint8_t data;
+            //LATAbits.LATA5 = 1;
+            //RED = 1;
             //ReadRegisterByte(appData.handleSPI0, STATUS_ADDR, );
             //ReadRegisterByte(appData.handleSPI0, uint8_t address, uint8_t *data)
-            ReadData(appData.handleSPI0, &data);
-           
-//            for (j = 0; j < 20; j++)
-//            {
-//                DelayInMillisecond(50);
-//                uint8_t currentStatus;
-//                uint32_t data = ReadData(appData.handleSPI0, &currentStatus);
-//                statusArray[j] = currentStatus;
-//                dataArr[j] = data;
-//            }
+            //ReadData(ads_handle);
+            //for (j = 0; j < 100; j++)
+            //{
+            
+
+                //DelayInMillisecond(1);
+                //dataArr[j++] = ReadData(ads_handle);
+
+                //DelayInMillisecond(1);
+                //dataArr[j++] = ReadData(ads_handle);
+                
+                //uint32_t data = ReadData(ads_handle);
+                //dataArr[j++] = data;
+            //}
+            
+            //RED = 1;
             
         }
         /* TODO: implement your application state machine.*/

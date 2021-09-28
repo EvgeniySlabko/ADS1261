@@ -91,6 +91,13 @@
                    displayName="Source Files"
                    projectFiles="true">
       <logicalFolder name="f2" displayName="app" projectFiles="true">
+        <logicalFolder name="f2" displayName="ADS1261" projectFiles="true">
+          <itemPath>../src/ADS1261.c</itemPath>
+          <itemPath>../src/ADS1261.h</itemPath>
+          <itemPath>../src/ADSConfigurations.h</itemPath>
+          <itemPath>../src/ADSDriver.h</itemPath>
+          <itemPath>../src/ADSDriver.c</itemPath>
+        </logicalFolder>
         <logicalFolder name="f1" displayName="system_config" projectFiles="true">
           <logicalFolder name="f1" displayName="default" projectFiles="true">
             <logicalFolder name="f1" displayName="framework" projectFiles="true">
@@ -135,8 +142,6 @@
             <itemPath>../src/system_config/default/system_tasks.c</itemPath>
           </logicalFolder>
         </logicalFolder>
-        <itemPath>../src/ADS1261.c</itemPath>
-        <itemPath>../src/ADS1261.h</itemPath>
         <itemPath>../src/app.c</itemPath>
         <itemPath>../src/main.c</itemPath>
       </logicalFolder>
@@ -294,7 +299,7 @@
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-cross-reference-file" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
-        <property key="heap-size" value="0"/>
+        <property key="heap-size" value="200"/>
         <property key="input-libraries" value=""/>
         <property key="kseg-length" value=""/>
         <property key="kseg-origin" value=""/>

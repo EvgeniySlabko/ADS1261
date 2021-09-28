@@ -4,18 +4,32 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/system_config/default/framework/driver/spi/static/src/drv_spi_mapping.c</file>
-            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/ADS1261.c</file>
             <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/system_config/default/system_init.c</file>
+            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/system_config/default/framework/driver/spi/dynamic/drv_spi_tasks.c</file>
             <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/Delay.c</file>
+            <file>file:/C:/Program%20Files%20(x86)/Microchip/xc32/v2.10/pic32mx/include/machine/int_types.h</file>
+            <file>file:/C:/Program%20Files%20(x86)/Microchip/xc32/v2.10/pic32mx/include/proc/p32mz1024efk144.h</file>
+            <file>file:/D:/microchip/harmony/v2_06/framework/peripheral/int/templates/int_SourceControl_Default.h</file>
+            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/ADSConfigurations.h</file>
+            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/main.c</file>
+            <file>file:/D:/microchip/harmony/v2_06/framework/peripheral/int/processor/int_p32mz1024efk144.h</file>
+            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/system_config/default/framework/driver/spi/dynamic/drv_spi_api.c</file>
+            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/ADS1261.h</file>
+            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/ADS1261.c</file>
+            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/ADSDriver.c</file>
+            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/system_config/default/system_tasks.c</file>
+            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/system_config/default/system_exceptions.c</file>
+            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/ADSDriver.h</file>
             <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/system_config/default/system_config.h</file>
             <file>file:/D:/microchip/harmony/v2_06/framework/peripheral/spi/templates/spi_Buffer_Default.h</file>
-            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/main.c</file>
+            <file>file:/C:/Program%20Files%20(x86)/Microchip/xc32/v2.10/pic32mx/include/stdlib.h</file>
+            <file>file:/D:/microchip/harmony/v2_06/framework/peripheral/int/templates/int_SourceFlag_Default.h</file>
             <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/system_config/default/system_definitions.h</file>
-            <file>file:/D:/microchip/harmony/v2_06/framework/peripheral/int/processor/int_p32mz1024efk144.h</file>
             <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/app.c</file>
             <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/system_config/default/system_interrupt.c</file>
             <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/app.h</file>
-            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/ADS1261.h</file>
+            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/system_config/default/framework/driver/spi/dynamic/drv_spi_master_ebm_tasks.c</file>
+            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/EFKTest.X/nbproject/Makefile-default.mk</file>
         </group>
     </open-files>
 </project-private>

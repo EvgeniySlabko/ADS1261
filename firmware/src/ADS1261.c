@@ -5,295 +5,328 @@
 ADSInitData ads_init_data;
 DRV_HANDLE spiHandle;
 
-void Init_ADS1261(DRV_HANDLE spiHandle)
+bool calibration = false;
+
+DRV_HANDLE Init_ADS1261(DRV_HANDLE spiHandle, volatile uint32_t *cs_lat_potr, volatile uint32_t cs_pin_mask)
 {
-//    Select the ADC data rate.
-//    00000: 2.5 SPS
-//    00001: 5 SPS
-//    00010: 10 SPS
-//    00011: 16.6 SPS
-//    00100: 20 SPS (default)
-//    00101: 50 SPS
-//    00110: 60 SPS
-//    00111: 100 SPS
-//    01000: 400 SPS
-//    01001: 1200 SPS
-//    01010: 2400 SPS
-//    01011: 4800 SPS
-//    01100: 7200 SPS
-//    01101: 14400 SPS
-//    01110: 19200 SPS
-//    01111: 25600 SPS
-//    10000 - 11111: 40000 SPS (fCLK = 10.24 MHz)
-    ads_init_data.mode0.dataRate = DR5;
+    currentHandle = GetInstance();
+    if (currentHandle == DRV_HANDLE_INVALID)
+    {
+        return DRV_HANDLE_INVALID;
+    }
     
-//    Select the digital filter mode.
-//    000: sinc1
-//    001: sinc2
-//    010: sinc3
-//    011: sinc4
-//    100: FIR (default)
-//    101: Reserved
-//    110: Reserved
-//    111: Reserved
-    ads_init_data.mode0.filter = 0b100;
+    memset (&(currentContext->adsInitData), 0, sizeof (ADSInitData));
+    currentContext->spiHandle = spiHandle;
+    currentContext->csPinMask = cs_pin_mask;
+    currentContext->csPort = cs_lat_potr;
+    currentContext->bufferHandle = 0;
 
-//    Conversion Start Delay
-//    Program the time delay at conversion start. Delay values are
-//    with fCLK = 7.3728 MHz.
-//    0000: 0 탎 (not for 25600 SPS or 40000 SPS operation)
-//    0001: 50 탎 (default)
-//    0010: 59 탎
-//    0011: 67 탎
-//    0100: 85 탎
-//    0101: 119 탎
-//    0110: 189 탎
-//    0111: 328 탎
-//    1000: 605 탎
-//    1001: 1.16 ms
-//    1010: 2.27 ms
-//    1011: 4.49 ms
-//    1100: 8.93 ms
-//    1101: 17.8 ms
-//    1110: Reserved
-//    1111: Reserved
-    ads_init_data.mode1.delay = 0b0001;
-//Chop and AC-Excitation Modes
-//Select the Chop and AC-excitation modes.
-//00: Normal mode (default)
-//01: Chop mode
-//10: 2-wire AC-excitation mode ( ADS1261 only)
-//11: 4-wire AC-excitation mode ( ADS1261 only)
+    // Set default configuration
 
-    ads_init_data.mode1.chop = 0b11;
-// ADC Conversion Mode
-    ads_init_data.mode1.convrt = 0b0; // 0: Continuous conversions (default)
-// GPIO control. Set AN1 and AN2 as analog inputs
-    ads_init_data.mode2.gpio_con2 = 1;
-    ads_init_data.mode2.gpio_con3 = 1;
+    //    Select the ADC data rate.
+    //    00000: 2.5 SPS
+    //    00001: 5 SPS
+    //    00010: 10 SPS
+    //    00011: 16.6 SPS
+    //    00100: 20 SPS (default)
+    //    00101: 50 SPS
+    //    00110: 60 SPS
+    //    00111: 100 SPS
+    //    01000: 400 SPS
+    //    01001: 1200 SPS
+    //    01010: 2400 SPS
+    //    01011: 4800 SPS
+    //    01100: 7200 SPS
+    //    01101: 14400 SPS
+    //    01110: 19200 SPS
+    //    01111: 25600 SPS
+    //    10000 - 11111: 40000 SPS (fCLK = 10.24 MHz)
+    currentContext->adsInitData.mode0.dataRate = DR5;
+    
+    //    Select the digital filter mode.
+    //    000: sinc1
+    //    001: sinc2
+    //    010: sinc3
+    //    011: sinc4
+    //    100: FIR (default)
+    //    101: Reserved
+    //    110: Reserved
+    //    111: Reserved
+    currentContext->adsInitData.mode0.filter = 0b100;
+
+    //    Conversion Start Delay
+    //    Program the time delay at conversion start. Delay values are
+    //    with fCLK = 7.3728 MHz.
+    //    0000: 0 탎 (not for 25600 SPS or 40000 SPS operation)
+    //    0001: 50 탎 (default)
+    //    0010: 59 탎
+    //    0011: 67 탎
+    //    0100: 85 탎
+    //    0101: 119 탎
+    //    0110: 189 탎
+    //    0111: 328 탎
+    //    1000: 605 탎
+    //    1001: 1.16 ms
+    //    1010: 2.27 ms
+    //    1011: 4.49 ms
+    //    1100: 8.93 ms
+    //    1101: 17.8 ms
+    //    1110: Reserved
+    //    1111: Reserved
+    currentContext->adsInitData.mode1.delay = 0b0001;
+    //Chop and AC-Excitation Modes
+    //Select the Chop and AC-excitation modes.
+    //00: Normal mode (default)
+    //01: Chop mode
+    //10: 2-wire AC-excitation mode ( ADS1261 only)
+    //11: 4-wire AC-excitation mode ( ADS1261 only)
+
+    currentContext->adsInitData.mode1.chop = 0b11;
+    // ADC Conversion Mode
+    currentContext->adsInitData.mode1.convrt = 0b0; // 0: Continuous conversions (default)
+    // GPIO control. Set AN1 and AN2 as analog inputs
+    currentContext->adsInitData.mode2.gpio_con2 = 1;
+    currentContext->adsInitData.mode2.gpio_con3 = 1;
     //ads_init_data.mode2.gpio_con0 = 1;
     //ads_init_data.mode2.gpio_con1 = 1;
     
-    ads_init_data.ref.rmuxn = 0b10;
-    ads_init_data.ref.rmuxp = 0b10;
-//Reference Negative Input
-//Select the negative reference input.
-//00: Internal reference negative
-//01: AVSS internal (default)
-//10: AIN1 external
-//11: AIN3 external ( ADS1261 only)
+    currentContext->adsInitData.ref.rmuxn = 0b10;
+    currentContext->adsInitData.ref.rmuxp = 0b10;
+    //Reference Negative Input
+    //Select the negative reference input.
+    //00: Internal reference negative
+    //01: AVSS internal (default)
+    //10: AIN1 external
+    //11: AIN3 external ( ADS1261 only)
 
-//ads_init_data.ref.rmuxn = 0b01; 
+    //ads_init_data.ref.rmuxn = 0b01; 
 
-//Reference Positive Input
-//Select the positive reference input.
-//00: Internal reference positive
-//01: AVDD internal (default)
-//10: AIN0 external
-//11: AIN2 external ( ADS1261 only)
-//ads_init_data.ref.rmuxp = 0b01; 
+    //Reference Positive Input
+    //Select the positive reference input.
+    //00: Internal reference positive
+    //01: AVDD internal (default)
+    //10: AIN0 external
+    //11: AIN2 external ( ADS1261 only)
+    //ads_init_data.ref.rmuxp = 0b01; 
 
 
-//Gain
-//Select the gain.
-//000: 1 (default)
-//001: 2
-//010: 4
-//011: 8
-//100: 16
-//101: 32
-//110: 64
-//111: 128
-ads_init_data.pga.gain = 0b111;
+    //Gain
+    //Select the gain.
+    //000: 1 (default)
+    //001: 2
+    //010: 4
+    //011: 8
+    //100: 16
+    //101: 32
+    //110: 64
+    //111: 128
+    currentContext->adsInitData.pga.gain = 0b111;
  
 
-ads_init_data.inpmux.muxp = 0b0011;
-ads_init_data.inpmux.muxn = 0b0100;
+    currentContext->adsInitData.inpmux.muxp = 0b0011;
+    currentContext->adsInitData.inpmux.muxn = 0b0100;
 
-WriteRegisterByte(spiHandle, MODE0_ADDR, *(uint8_t*) &ads_init_data.mode0);
-//DelayInMillisecond(1);
 
-DelayInMillisecond(1);
-WriteRegisterByte(spiHandle, MODE2_ADDR, *(uint8_t*) &ads_init_data.mode2);
-DelayInMillisecond(1);
-WriteRegisterByte(spiHandle, REF_ADDR, *(uint8_t*) &ads_init_data.ref);
-WriteRegisterByte(spiHandle, PGA_ADDR, *(uint8_t*) &ads_init_data.pga);
-WriteRegisterByte(spiHandle, INPMUX_ADDR, *(uint8_t*) &ads_init_data.inpmux);
-
-WriteRegisterByte(spiHandle, MODE1_ADDR, *(uint8_t*) &ads_init_data.mode1);
+    ConfigureDevice(currentHandle);
+return currentHandle;
 }
 
-bool WriteRegisterByte(DRV_HANDLE spiHandle, uint8_t address, uint8_t data)
+void TransmitError(DRV_HANDLE adsHandle)
 {
-    DelayInMillisecond(1);
-    CS_PIN = 0;
-    Delay50ns();
-    
-    //uint8_t data1 = 0b00000001; //data reg
-    uint8_t operation = 0x40 + address;
-    uint8_t nop = 0x00;
-    uint8_t ffByte; // Must be 0xFF
-    uint8_t echoByte1; // Echo for operation
-    uint8_t echoByte2; // Echo for data
-           
-    DRV_SPI_BufferAddWriteRead2(spiHandle, &operation, 1, &ffByte, sizeof(ffByte), 0, 0, 0); 
-    DRV_SPI_BufferAddWriteRead2(spiHandle, &data, sizeof(data), &echoByte1, 1, 0, 0, 0);
-    //Delay50ns();
-    //DRV_SPI_BufferAddWriteRead2(spiHandle, &nop, sizeof(nop), &echoByte2, 1, 0, 0, 0);
-     
-    DelayInMillisecond(1);
-    CS_PIN = 1;
-    DelayInMillisecond(1);
-    
-    return ((ffByte = 0xFF) && (echoByte1 == operation));
-}
-
-uint8_t ReadRegisterByte(DRV_HANDLE spiHandle, uint8_t address, uint8_t *data)
-{
-    DelayInMillisecond(1);
-    //CS_PIN = 0;
-    Delay50ns();
-    
-    //uint8_t data1 = 0b00000001; //data reg
-    uint8_t operation = 0x20 + address;
-    uint8_t nop = 0x00;
-    uint8_t ffByte; // Must be 0xFF
-    uint8_t echoByte1; // Echo for operation
-    uint8_t dataByte; // Echo for data
-      
-    DRV_SPI_BufferAddWriteRead2(spiHandle, &operation, 1, &ffByte, sizeof(ffByte), 0, 0, 0);     
-    DRV_SPI_BufferAddWriteRead2(spiHandle, &nop, sizeof(nop), &echoByte1, 1, 0, 0, 0);
-    DRV_SPI_BufferAddWriteRead2(spiHandle, &nop, sizeof(nop), &dataByte, 1, 0, 0, 0);
-     
-    DelayInMillisecond(1);
-    CS_PIN = 1;
-    DelayInMillisecond(1);
-    
-    *data = dataByte;
-    return ((ffByte = 0xFF) && (echoByte1 == nop) && (dataByte == *data));
-}
-
-void Start(DRV_HANDLE spiHandle)
-{
-    DelayInMillisecond(1);
-    CS_PIN = 0;
-    Delay50ns();
-    
-    //uint8_t data1 = 0b00000001; //data reg
-    uint8_t operation = 0x08;
-    uint8_t nop = 0x00;
-    uint8_t ffByte; // Must be 0xFF
-    uint8_t echoByte1; // Echo for operation
-      
-    DRV_SPI_BUFFER_HANDLE drvSPIBufferHandle;
-    drvSPIBufferHandle = DRV_SPI_BufferAddWriteRead2(spiHandle, &operation, 1, &ffByte, sizeof(ffByte), 0, 0, 0);     
-    DRV_SPI_BufferAddWriteRead2(spiHandle, &nop, sizeof(nop), &echoByte1, 1, 0, 0, 0);
-
-     
-    DelayInMillisecond(1);
-    CS_PIN = 1;
-    DelayInMillisecond(1);
-}
-
-void Stop(DRV_HANDLE spiHandle)
-{
-    DelayInMillisecond(1);
-    CS_PIN = 0;
-    Delay50ns();
-    
-    //uint8_t data1 = 0b00000001; //data reg
-    uint8_t operation = 0x0A;
-    uint8_t nop = 0x00;
-    uint8_t ffByte; // Must be 0xFF
-    uint8_t echoByte1; // Echo for operation
-      
-    DRV_SPI_BufferAddWriteRead2(spiHandle, &operation, 1, &ffByte, sizeof(ffByte), 0, 0, 0);     
-    DRV_SPI_BufferAddWriteRead2(spiHandle, &nop, sizeof(nop), &echoByte1, 1, 0, 0, 0);
-
-     
-    DelayInMillisecond(1);
-    CS_PIN = 1;
-    DelayInMillisecond(1);
-}
-
-void Reset(DRV_HANDLE spiHandle)
-{
-    DelayInMillisecond(1);
-    CS_PIN = 0;
-    Delay50ns();
-    
-    //uint8_t data1 = 0b00000001; //data reg
-    uint8_t operation = 0x06;
-    uint8_t nop = 0x00;
-    uint8_t ffByte; // Must be 0xFF
-    uint8_t echoByte1; // Echo for operation
-      
-    DRV_SPI_BufferAddWriteRead2(spiHandle, &operation, 1, &ffByte, sizeof(ffByte), 0, 0, 0);     
-    DRV_SPI_BufferAddWriteRead2(spiHandle, &nop, sizeof(nop), &echoByte1, 1, 0, 0, 0);
-
-     
-    DelayInMillisecond(1);
-    CS_PIN = 1;
-    DelayInMillisecond(1);
-}
-
-void TransmitComplit(DRV_SPI_BUFFER_EVENT event, DRV_SPI_BUFFER_HANDLE bufferHandle, void * context )
-{
-    GREEN = 1;
-    RED = 0;
-    CS_PIN = 1;
-}
-
-
-void TransmitComplit2(DRV_SPI_BUFFER_EVENT event, DRV_SPI_BUFFER_HANDLE bufferHandle, void * context )
-{
-    GREEN = 0;
     RED = 1;
 }
-uint32_t ReadData(DRV_HANDLE spiHandle)
+
+void TransmitComplete(DRV_SPI_BUFFER_EVENT event, DRV_SPI_BUFFER_HANDLE bufferHandle, void * context )
 {
-    CS_PIN = 0;
+    SetCS();
+}
+
+void WriteRegisterByte(DRV_HANDLE adsHandle, uint8_t address, uint8_t data)
+{
+    currentHandle = adsHandle;
+    TestForBusy(adsHandle);
+    
+    UnSetCS();
+    uint8_t response[3];
+    uint8_t query[3];
+    query[0] = 0x40 + address;
+    query[1] = data;
+    query[2] = 0x00;
+
+    DRV_SPI_BUFFER_HANDLE bufferHandle = DRV_SPI_BufferAddWriteRead2(currentContext->spiHandle, query, 3, response, 3, TransmitComplete, 0, &(currentContext->bufferHandle));
+    if (bufferHandle == DRV_SPI_BUFFER_HANDLE_INVALID)
+    {
+        currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_ERROR;
+        TransmitError(adsHandle);
+    }
+}
+
+uint8_t ReadRegisterByte(DRV_HANDLE adsHandle, uint8_t address)
+{
+    currentHandle = adsHandle;
+    while(currentContext->bufferHandle == DRV_SPI_BUFFER_EVENT_PROCESSING){}
+    currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_PROCESSING;
+    
+    UnSetCS();
+    uint8_t response[3];
+    uint8_t query[3];
+    query[0] = 0x20 + address;
+    query[1] = 0x00;
+    query[2] = 0x00;
+    
+    DRV_SPI_BUFFER_HANDLE bufferHandle = DRV_SPI_BufferAddWriteRead2(currentContext->spiHandle, query, 3, response, 3, TransmitComplete, 0, &(currentContext->bufferHandle));     
+    if (bufferHandle == DRV_SPI_BUFFER_HANDLE_INVALID)
+    {
+        currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_ERROR;
+        TransmitError(adsHandle);
+    }
+    return response[2];
+}
+
+void Start(DRV_HANDLE adsHandle)
+{
+    currentHandle = adsHandle;
+    while(currentContext->bufferHandle == DRV_SPI_BUFFER_EVENT_PROCESSING){}
+    currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_PROCESSING;
+    
+    UnSetCS();
+    uint8_t response[2];
+    uint8_t query[2];
+    query[0] = 0x08;
+    query[1] = 0x00;
+    
+    DRV_SPI_BUFFER_HANDLE bufferHandle = DRV_SPI_BufferAddWriteRead2(currentContext->spiHandle, query, 2, response, 2, TransmitComplete, 0, &(currentContext->bufferHandle)); 
+    if (bufferHandle == DRV_SPI_BUFFER_HANDLE_INVALID)
+    {
+        currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_ERROR;
+        TransmitError(adsHandle);
+    }
+}
+
+void Stop(DRV_HANDLE adsHandle)
+{
+    currentHandle = adsHandle;
+    while(currentContext->bufferHandle == DRV_SPI_BUFFER_EVENT_PROCESSING){}
+    currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_PROCESSING;
+    
+    UnSetCS();
+    uint8_t response[2];
+    uint8_t query[2];
+    query[0] = 0x0A;
+    query[1] = 0x00;
+      
+    DRV_SPI_BUFFER_HANDLE bufferHandle = DRV_SPI_BufferAddWriteRead2(currentContext->spiHandle, query, 2, response, 2, TransmitComplete, 0, &(currentContext->bufferHandle));
+    if (bufferHandle == DRV_SPI_BUFFER_HANDLE_INVALID)
+    {
+        currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_ERROR;
+        TransmitError(adsHandle);
+    }
+}
+
+void Reset(DRV_HANDLE adsHandle)
+{ 
+    currentHandle = adsHandle;
+    while(currentContext->bufferHandle == DRV_SPI_BUFFER_EVENT_PROCESSING){}
+    currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_PROCESSING;
+    
+    UnSetCS();
+    uint8_t response[2];
+    uint8_t query[2];
+    query[0] = 0x06;
+    query[1] = 0x00;
+      
+    DRV_SPI_BUFFER_HANDLE bufferHandle = DRV_SPI_BufferAddWriteRead2(currentContext->spiHandle, query, 2, response, 2, TransmitComplete, 0, &(currentContext->bufferHandle));  
+    if (bufferHandle == DRV_SPI_BUFFER_HANDLE_INVALID)
+    {
+        currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_ERROR;
+        TransmitError(adsHandle);
+    }
+}
+
+uint32_t ReadData(DRV_HANDLE adsHandle)
+{
+    currentHandle = adsHandle;
+    while(currentContext->bufferHandle == DRV_SPI_BUFFER_EVENT_PROCESSING){}
+    currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_PROCESSING;
+    
+    //DelayInMillisecond(100);
+    
+    UnSetCS();
+    uint32_t result;
     uint8_t dataBuf[5];
-    uint8_t resultBuf[6];  
+    uint8_t resultBuf[5];   
+    dataBuf[0] = 0x12; // operation
+    dataBuf[1] = 0x00; // Arbitary
+    dataBuf[2] = 0x00; // nop
+    dataBuf[3] = 0x00; // nop
+    dataBuf[4] = 0x00; // nop
     
-    dataBuf[0] = 0x12; 
-    dataBuf[1] = 0x00;
-    dataBuf[2] = 0x00;
-    dataBuf[3] = 0x00;
-    dataBuf[4] = 0x00;
-    dataBuf[5] = 0x00;
+    DRV_SPI_BUFFER_HANDLE bufferHandle = DRV_SPI_BufferAddWriteRead2(currentContext->spiHandle, dataBuf, 5, resultBuf, 5, TransmitComplete, 0, &(currentContext->bufferHandle)); 
+    if (bufferHandle == DRV_SPI_BUFFER_HANDLE_INVALID)
+    {
+        TransmitError(adsHandle);
+        currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_ERROR;
+    }
     
-    uint32_t operation = 0x5555;
-    uint8_t nop = 0x00;
+    result += resultBuf[2];
+    result = result << 8;
+    result += resultBuf[3];
+    result = result << 8;
+    result += resultBuf[4];
+    return result;
+}
+
+void ConfigureDevice(DRV_HANDLE adsHandle)
+{   
+    WriteRegisterByte(currentHandle, MODE0_ADDR, *(uint8_t*) &(currentContext->adsInitData.mode0));
+    WriteRegisterByte(currentHandle, MODE2_ADDR, *(uint8_t*) &(currentContext->adsInitData.mode2));
+    WriteRegisterByte(currentHandle, REF_ADDR, *(uint8_t*) &(currentContext->adsInitData.ref));
+    WriteRegisterByte(currentHandle, PGA_ADDR, *(uint8_t*) &(currentContext->adsInitData.pga));
+    WriteRegisterByte(currentHandle, INPMUX_ADDR, *(uint8_t*) &(currentContext->adsInitData.inpmux));
+    WriteRegisterByte(currentHandle, MODE1_ADDR, *(uint8_t*) &(currentContext->adsInitData.mode1));
+}
+
+void OffsetSelfCalibration(DRV_HANDLE adsHandle)
+{
+    currentHandle = adsHandle;
+    while(currentContext->bufferHandle == DRV_SPI_BUFFER_EVENT_PROCESSING){}
+    currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_PROCESSING;
     
-    uint32_t ffByte; // Must be 0xFF
-    uint8_t echoByte1; // Echo for operation
-    
-    uint8_t dataByte1;
-    uint8_t dataByte2;
-    uint8_t dataByte3;
-    DRV_SPI_BufferAddWriteRead2(spiHandle, dataBuf, 3, resultBuf, 3, TransmitComplit2, 0, 0); 
-    //DRV_SPI_BufferAddWriteRead2(spiHandle, &dataBuf[4], 1, &resultBuf[4], 1, TransmitComplit, 0, 0); 
-    //GREEN = 0;
-    //RED = 1;
-         
-    //DRV_SPI_BufferAddWriteRead2(spiHandle, &nop, 4, &echoByte1, 4, 0, 0, 0);
-    Delay20ns();
-    
-    //DRV_SPI_BufferAddWriteRead2(spiHandle, &nop, 4, &dataByte1, 4, 0, 0, 0);
-    //result += dataByte1;
-    //result = result << 8;
-    
-//    DRV_SPI_BufferAddWriteRead2(spiHandle, &nop, 4, &dataByte2, 4, 0, 0, 0);
-//    result += dataByte2;
-//    result = result << 8;
-//    
-//    DRV_SPI_BufferAddWriteRead2(spiHandle, &nop, 4, &dataByte3, 4, 0, 0, 0);
-//    result += dataByte3;
-//       
-//    DelayInMillisecond(1);
-//    CS_PIN = 1;
-//    DelayInMillisecond(1);
-    
-    return 0;
+    UnSetCS();
+    uint8_t response[2];
+    uint8_t query[2];
+    query[0] = 0x0A;
+    query[1] = 0x00;
+      
+    DRV_SPI_BUFFER_HANDLE bufferHandle = DRV_SPI_BufferAddWriteRead2(currentContext->spiHandle, query, 2, response, 2, TransmitComplete, 0, &(currentContext->bufferHandle)); 
+    if (bufferHandle == DRV_SPI_BUFFER_HANDLE_INVALID)
+    {
+        TransmitError(adsHandle);
+        currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_ERROR;
+    }
+}
+
+void DRDYHandler()
+{
+    if (!calibration)
+    {
+        // ?????? ????????
+    }  
+}
+
+void TestForBusy(DRV_HANDLE adsHandle)
+{
+    currentHandle = adsHandle;
+    if (currentContext->bufferHandle != 0)
+    {
+        while((DRV_SPI_BufferStatus(currentContext->bufferHandle)) != DRV_SPI_BUFFER_EVENT_COMPLETE){RED = 1;}
+    }
+}
+void SetOffset(DRV_HANDLE adsHandle, uint32_t subtractedValue)
+{
+    subtractedValue &= 0x00FFFFFF;
+    uint8_t *offsetPtr = (uint8_t *)&subtractedValue;
+    WriteRegisterByte(adsHandle, OFCAL2_ADDR, offsetPtr[2]);
+    WriteRegisterByte(adsHandle, OFCAL1_ADDR, offsetPtr[1]);
+    WriteRegisterByte(adsHandle, OFCAL0_ADDR, offsetPtr[0]);
 }

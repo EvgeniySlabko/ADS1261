@@ -1,19 +1,84 @@
 build/default/debug/_ext/1360937237/ADS1261.o: ../src/ADS1261.c \
  ../src/ADS1261.h ../../../../framework/driver/driver.h \
- ../../../../framework/driver/driver_common.h ../src/Delay.h ../src/app.h \
+ ../../../../framework/driver/driver_common.h ../src/ADSConfigurations.h \
+ ../src/ADSDriver.h \
+ ../../../../framework/driver/spi/drv_spi_definitions.h \
  ../src/system_config/default/system_config.h \
- ../src/system_config/default/system_definitions.h \
+ ../../../../framework/peripheral/spi/plib_spi.h \
+ ../../../../framework/peripheral/spi/processor/spi_processor.h \
+ ../../../../framework/peripheral/spi/processor/spi_p32xxxx.h \
+ ../../../../framework/peripheral/spi/processor/spi_p32mz1024efk144.h \
+ ../../../../framework/peripheral/peripheral_common_32bit.h \
+ ../../../../framework/peripheral/peripheral_common.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_EnableControl_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_registers.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_StopInIdle_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_ReceiverOverflow_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_TransmitBufferFullStatus_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_TransmitBufferEmptyStatus_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_ReceiveBufferStatus_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_PinControl_PIC32.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_CommunicationWidth_PIC32.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_AudioCommunicationWidth_PIC32.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_InputSamplePhase_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_OutputDataPhase_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_ClockPolarity_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_MasterControl_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_BaudRate_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_BusStatus_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_ReadDataSignStatus_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_SlaveSelectControl_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_TransmitUnderRunStatus_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_FIFOControl_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_FIFOCount_PIC32.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_ReceiveFIFOStatus_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_FIFOShiftRegisterEmptyStatus_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_FIFOInterruptMode_PIC32.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_FramedCommunication_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_FrameSyncPulseDirection_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_FrameSyncPulsePolarity_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_FrameSyncPulseEdge_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_FrameSyncPulseWidth_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_FrameSyncPulseCounter_PIC32.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_FrameErrorStatus_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_Buffer_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_BaudRateClock_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_ErrorInterruptControl_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_AudioErrorControl_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_AudioProtocolControl_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_AudioTransmitMode_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_AudioProtocolMode_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_Buffer32bit_Default.h \
+ ../../../../framework/peripheral/spi/processor/../templates/spi_Buffer16bit_Default.h \
  ../../../../framework/system/common/sys_common.h \
  ../../../../framework/system/common/sys_module.h \
- ../../../../framework/system/devcon/sys_devcon.h \
- ../../../../framework/system/system.h \
+ ../../../../framework/system/int/sys_int.h \
+ ../../../../framework/peripheral/int/plib_int.h \
+ ../../../../framework/peripheral/int/processor/int_processor.h \
+ ../../../../framework/peripheral/int/processor/int_p32xxxx.h \
+ ../../../../framework/peripheral/int/plib_int_private_pic32.h \
+ ../../../../framework/peripheral/int/processor/int_p32mz1024efk144.h \
+ ../../../../framework/peripheral/int/processor/../templates/int_SingleVectorShadowSet_Default.h \
+ ../../../../framework/peripheral/int/processor/../templates/int_VectorSelect_Default.h \
+ ../../../../framework/peripheral/int/processor/../templates/int_ProximityTimerEnable_Default.h \
+ ../../../../framework/peripheral/int/processor/../templates/int_ProximityTimerControl_Default.h \
+ ../../../../framework/peripheral/int/processor/../templates/int_ExternalINTEdgeSelect_Default.h \
+ ../../../../framework/peripheral/int/processor/../templates/int_INTCPUPriority_Default.h \
+ ../../../../framework/peripheral/int/processor/../templates/int_INTCPUVector_Default.h \
+ ../../../../framework/peripheral/int/processor/../templates/int_SourceFlag_Default.h \
+ ../../../../framework/peripheral/int/processor/../templates/int_SourceControl_Default.h \
+ ../../../../framework/peripheral/int/processor/../templates/int_VectorPriority_Default.h \
+ ../../../../framework/peripheral/int/processor/../templates/int_CPUCurrentPriorityLevel_Default.h \
+ ../../../../framework/peripheral/int/processor/../templates/int_EnableControl_PIC32.h \
+ ../../../../framework/peripheral/int/processor/../templates/int_ShadowRegisterAssign_Default.h \
+ ../../../../framework/peripheral/int/processor/../templates/int_VariableOffset_Default.h \
+ ../../../../framework/peripheral/int/processor/../templates/int_SoftwareNMI_Default.h \
+ ../../../../framework/system/int/sys_int_mapping.h \
  ../../../../framework/system/clk/sys_clk.h \
  ../../../../framework/peripheral/osc/plib_osc.h \
  ../../../../framework/peripheral/osc/processor/osc_processor.h \
  ../../../../framework/peripheral/osc/processor/osc_p32xxxx.h \
  ../../../../framework/peripheral/osc/processor/osc_p32mz1024efk144.h \
- ../../../../framework/peripheral/peripheral_common_32bit.h \
- ../../../../framework/peripheral/peripheral_common.h \
  ../../../../framework/peripheral/osc/processor/../templates/osc_OnWaitAction_Default.h \
  ../../../../framework/peripheral/osc/processor/../templates/osc_SecondaryEnable_Default.h \
  ../../../../framework/peripheral/osc/processor/../templates/osc_SecondaryReady_Default_1.h \
@@ -65,58 +130,6 @@ build/default/debug/_ext/1360937237/ADS1261.o: ../src/ADS1261.c \
  ../../../../framework/peripheral/osc/processor/../templates/osc_PLLBypass_Unsupported.h \
  ../../../../framework/peripheral/osc/processor/../templates/osc_BTPLLClockOut_Unsupported.h \
  ../../../../framework/system/clk/sys_clk_compatibility.h \
- ../../../../framework/system/int/sys_int.h \
- ../../../../framework/peripheral/int/plib_int.h \
- ../../../../framework/peripheral/int/processor/int_processor.h \
- ../../../../framework/peripheral/int/processor/int_p32xxxx.h \
- ../../../../framework/peripheral/int/plib_int_private_pic32.h \
- ../../../../framework/peripheral/int/processor/int_p32mz1024efk144.h \
- ../../../../framework/peripheral/int/processor/../templates/int_SingleVectorShadowSet_Default.h \
- ../../../../framework/peripheral/int/processor/../templates/int_VectorSelect_Default.h \
- ../../../../framework/peripheral/int/processor/../templates/int_ProximityTimerEnable_Default.h \
- ../../../../framework/peripheral/int/processor/../templates/int_ProximityTimerControl_Default.h \
- ../../../../framework/peripheral/int/processor/../templates/int_ExternalINTEdgeSelect_Default.h \
- ../../../../framework/peripheral/int/processor/../templates/int_INTCPUPriority_Default.h \
- ../../../../framework/peripheral/int/processor/../templates/int_INTCPUVector_Default.h \
- ../../../../framework/peripheral/int/processor/../templates/int_SourceFlag_Default.h \
- ../../../../framework/peripheral/int/processor/../templates/int_SourceControl_Default.h \
- ../../../../framework/peripheral/int/processor/../templates/int_VectorPriority_Default.h \
- ../../../../framework/peripheral/int/processor/../templates/int_CPUCurrentPriorityLevel_Default.h \
- ../../../../framework/peripheral/int/processor/../templates/int_EnableControl_PIC32.h \
- ../../../../framework/peripheral/int/processor/../templates/int_ShadowRegisterAssign_Default.h \
- ../../../../framework/peripheral/int/processor/../templates/int_VariableOffset_Default.h \
- ../../../../framework/peripheral/int/processor/../templates/int_SoftwareNMI_Default.h \
- ../../../../framework/system/int/sys_int_mapping.h \
- ../src/system_config/default/framework/driver/adc/drv_adc_static.h \
- ../../../../framework/peripheral/adchs/plib_adchs.h \
- ../../../../framework/peripheral/adchs/processor/adchs_processor.h \
- ../../../../framework/peripheral/adchs/processor/adchs_p32xxxx.h \
- ../../../../framework/peripheral/adchs/processor/adchs_p32mz1024efk144.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_Registers_PIC32MZ_EF.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_EnableControl_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_TurboMode_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_DigitalComparator_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_DigitalFilter_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_FIFO_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_DMA_Unsupported.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_CVD_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_VREFControl_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_AnalogInputScan_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_AnalogFeatureControl_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_DigitalFeatureControl_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_AnalogInputModeControl_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_TriggerControl_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_ChannelTriggerSampleControl_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_EarlyInterruptControl_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_ManualControl_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_UpdateReadyControl_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_InputControl_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_ExternalConversionRequest_Unsupported.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_Setup_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_AnalogInputCheck_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_ChannelConfiguration_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_ConversionResult_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_ScanEnable_Unsupported.h \
  ../../../../framework/system/ports/sys_ports.h \
  ../../../../framework/system/ports/sys_ports_definitions.h \
  ../../../../framework/peripheral/ports/plib_ports.h \
@@ -148,53 +161,42 @@ build/default/debug/_ext/1360937237/ADS1261.o: ../src/ADS1261.c \
  ../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeControl_Default.h \
  ../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Default.h \
  ../../../../framework/peripheral/ports/plib_ports_compatibility.h \
+ ../src/Delay.h ../src/app.h \
+ ../src/system_config/default/system_definitions.h \
+ ../../../../framework/system/devcon/sys_devcon.h \
+ ../../../../framework/system/system.h \
+ ../src/system_config/default/framework/driver/adc/drv_adc_static.h \
+ ../../../../framework/peripheral/adchs/plib_adchs.h \
+ ../../../../framework/peripheral/adchs/processor/adchs_processor.h \
+ ../../../../framework/peripheral/adchs/processor/adchs_p32xxxx.h \
+ ../../../../framework/peripheral/adchs/processor/adchs_p32mz1024efk144.h \
+ ../../../../framework/peripheral/adchs/processor/../templates/adchs_Registers_PIC32MZ_EF.h \
+ ../../../../framework/peripheral/adchs/processor/../templates/adchs_EnableControl_Default.h \
+ ../../../../framework/peripheral/adchs/processor/../templates/adchs_TurboMode_Default.h \
+ ../../../../framework/peripheral/adchs/processor/../templates/adchs_DigitalComparator_Default.h \
+ ../../../../framework/peripheral/adchs/processor/../templates/adchs_DigitalFilter_Default.h \
+ ../../../../framework/peripheral/adchs/processor/../templates/adchs_FIFO_Default.h \
+ ../../../../framework/peripheral/adchs/processor/../templates/adchs_DMA_Unsupported.h \
+ ../../../../framework/peripheral/adchs/processor/../templates/adchs_CVD_Default.h \
+ ../../../../framework/peripheral/adchs/processor/../templates/adchs_VREFControl_Default.h \
+ ../../../../framework/peripheral/adchs/processor/../templates/adchs_AnalogInputScan_Default.h \
+ ../../../../framework/peripheral/adchs/processor/../templates/adchs_AnalogFeatureControl_Default.h \
+ ../../../../framework/peripheral/adchs/processor/../templates/adchs_DigitalFeatureControl_Default.h \
+ ../../../../framework/peripheral/adchs/processor/../templates/adchs_AnalogInputModeControl_Default.h \
+ ../../../../framework/peripheral/adchs/processor/../templates/adchs_TriggerControl_Default.h \
+ ../../../../framework/peripheral/adchs/processor/../templates/adchs_ChannelTriggerSampleControl_Default.h \
+ ../../../../framework/peripheral/adchs/processor/../templates/adchs_EarlyInterruptControl_Default.h \
+ ../../../../framework/peripheral/adchs/processor/../templates/adchs_ManualControl_Default.h \
+ ../../../../framework/peripheral/adchs/processor/../templates/adchs_UpdateReadyControl_Default.h \
+ ../../../../framework/peripheral/adchs/processor/../templates/adchs_InputControl_Default.h \
+ ../../../../framework/peripheral/adchs/processor/../templates/adchs_ExternalConversionRequest_Unsupported.h \
+ ../../../../framework/peripheral/adchs/processor/../templates/adchs_Setup_Default.h \
+ ../../../../framework/peripheral/adchs/processor/../templates/adchs_AnalogInputCheck_Default.h \
+ ../../../../framework/peripheral/adchs/processor/../templates/adchs_ChannelConfiguration_Default.h \
+ ../../../../framework/peripheral/adchs/processor/../templates/adchs_ConversionResult_Default.h \
+ ../../../../framework/peripheral/adchs/processor/../templates/adchs_ScanEnable_Unsupported.h \
  ../../../../framework/driver/spi/drv_spi.h \
- ../../../../framework/driver/spi/drv_spi_definitions.h \
- ../../../../framework/peripheral/spi/plib_spi.h \
- ../../../../framework/peripheral/spi/processor/spi_processor.h \
- ../../../../framework/peripheral/spi/processor/spi_p32xxxx.h \
- ../../../../framework/peripheral/spi/processor/spi_p32mz1024efk144.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_EnableControl_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_registers.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_StopInIdle_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_ReceiverOverflow_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_TransmitBufferFullStatus_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_TransmitBufferEmptyStatus_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_ReceiveBufferStatus_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_PinControl_PIC32.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_CommunicationWidth_PIC32.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_AudioCommunicationWidth_PIC32.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_InputSamplePhase_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_OutputDataPhase_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_ClockPolarity_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_MasterControl_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_BaudRate_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_BusStatus_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_ReadDataSignStatus_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_SlaveSelectControl_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_TransmitUnderRunStatus_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_FIFOControl_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_FIFOCount_PIC32.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_ReceiveFIFOStatus_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_FIFOShiftRegisterEmptyStatus_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_FIFOInterruptMode_PIC32.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_FramedCommunication_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_FrameSyncPulseDirection_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_FrameSyncPulsePolarity_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_FrameSyncPulseEdge_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_FrameSyncPulseWidth_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_FrameSyncPulseCounter_PIC32.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_FrameErrorStatus_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_Buffer_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_BaudRateClock_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_ErrorInterruptControl_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_AudioErrorControl_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_AudioProtocolControl_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_AudioTransmitMode_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_AudioProtocolMode_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_Buffer32bit_Default.h \
- ../../../../framework/peripheral/spi/processor/../templates/spi_Buffer16bit_Default.h \
- ../src/app.h
+ ../../../../framework/driver/spi/drv_spi_definitions.h ../src/app.h
 
 ../src/ADS1261.h:
 
@@ -202,21 +204,153 @@ build/default/debug/_ext/1360937237/ADS1261.o: ../src/ADS1261.c \
 
 ../../../../framework/driver/driver_common.h:
 
-../src/Delay.h:
+../src/ADSConfigurations.h:
 
-../src/app.h:
+../src/ADSDriver.h:
+
+../../../../framework/driver/spi/drv_spi_definitions.h:
 
 ../src/system_config/default/system_config.h:
 
-../src/system_config/default/system_definitions.h:
+../../../../framework/peripheral/spi/plib_spi.h:
+
+../../../../framework/peripheral/spi/processor/spi_processor.h:
+
+../../../../framework/peripheral/spi/processor/spi_p32xxxx.h:
+
+../../../../framework/peripheral/spi/processor/spi_p32mz1024efk144.h:
+
+../../../../framework/peripheral/peripheral_common_32bit.h:
+
+../../../../framework/peripheral/peripheral_common.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_EnableControl_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_registers.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_StopInIdle_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_ReceiverOverflow_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_TransmitBufferFullStatus_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_TransmitBufferEmptyStatus_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_ReceiveBufferStatus_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_PinControl_PIC32.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_CommunicationWidth_PIC32.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_AudioCommunicationWidth_PIC32.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_InputSamplePhase_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_OutputDataPhase_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_ClockPolarity_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_MasterControl_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_BaudRate_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_BusStatus_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_ReadDataSignStatus_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_SlaveSelectControl_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_TransmitUnderRunStatus_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_FIFOControl_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_FIFOCount_PIC32.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_ReceiveFIFOStatus_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_FIFOShiftRegisterEmptyStatus_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_FIFOInterruptMode_PIC32.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_FramedCommunication_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_FrameSyncPulseDirection_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_FrameSyncPulsePolarity_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_FrameSyncPulseEdge_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_FrameSyncPulseWidth_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_FrameSyncPulseCounter_PIC32.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_FrameErrorStatus_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_Buffer_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_BaudRateClock_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_ErrorInterruptControl_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_AudioErrorControl_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_AudioProtocolControl_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_AudioTransmitMode_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_AudioProtocolMode_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_Buffer32bit_Default.h:
+
+../../../../framework/peripheral/spi/processor/../templates/spi_Buffer16bit_Default.h:
 
 ../../../../framework/system/common/sys_common.h:
 
 ../../../../framework/system/common/sys_module.h:
 
-../../../../framework/system/devcon/sys_devcon.h:
+../../../../framework/system/int/sys_int.h:
 
-../../../../framework/system/system.h:
+../../../../framework/peripheral/int/plib_int.h:
+
+../../../../framework/peripheral/int/processor/int_processor.h:
+
+../../../../framework/peripheral/int/processor/int_p32xxxx.h:
+
+../../../../framework/peripheral/int/plib_int_private_pic32.h:
+
+../../../../framework/peripheral/int/processor/int_p32mz1024efk144.h:
+
+../../../../framework/peripheral/int/processor/../templates/int_SingleVectorShadowSet_Default.h:
+
+../../../../framework/peripheral/int/processor/../templates/int_VectorSelect_Default.h:
+
+../../../../framework/peripheral/int/processor/../templates/int_ProximityTimerEnable_Default.h:
+
+../../../../framework/peripheral/int/processor/../templates/int_ProximityTimerControl_Default.h:
+
+../../../../framework/peripheral/int/processor/../templates/int_ExternalINTEdgeSelect_Default.h:
+
+../../../../framework/peripheral/int/processor/../templates/int_INTCPUPriority_Default.h:
+
+../../../../framework/peripheral/int/processor/../templates/int_INTCPUVector_Default.h:
+
+../../../../framework/peripheral/int/processor/../templates/int_SourceFlag_Default.h:
+
+../../../../framework/peripheral/int/processor/../templates/int_SourceControl_Default.h:
+
+../../../../framework/peripheral/int/processor/../templates/int_VectorPriority_Default.h:
+
+../../../../framework/peripheral/int/processor/../templates/int_CPUCurrentPriorityLevel_Default.h:
+
+../../../../framework/peripheral/int/processor/../templates/int_EnableControl_PIC32.h:
+
+../../../../framework/peripheral/int/processor/../templates/int_ShadowRegisterAssign_Default.h:
+
+../../../../framework/peripheral/int/processor/../templates/int_VariableOffset_Default.h:
+
+../../../../framework/peripheral/int/processor/../templates/int_SoftwareNMI_Default.h:
+
+../../../../framework/system/int/sys_int_mapping.h:
 
 ../../../../framework/system/clk/sys_clk.h:
 
@@ -227,10 +361,6 @@ build/default/debug/_ext/1360937237/ADS1261.o: ../src/ADS1261.c \
 ../../../../framework/peripheral/osc/processor/osc_p32xxxx.h:
 
 ../../../../framework/peripheral/osc/processor/osc_p32mz1024efk144.h:
-
-../../../../framework/peripheral/peripheral_common_32bit.h:
-
-../../../../framework/peripheral/peripheral_common.h:
 
 ../../../../framework/peripheral/osc/processor/../templates/osc_OnWaitAction_Default.h:
 
@@ -334,110 +464,6 @@ build/default/debug/_ext/1360937237/ADS1261.o: ../src/ADS1261.c \
 
 ../../../../framework/system/clk/sys_clk_compatibility.h:
 
-../../../../framework/system/int/sys_int.h:
-
-../../../../framework/peripheral/int/plib_int.h:
-
-../../../../framework/peripheral/int/processor/int_processor.h:
-
-../../../../framework/peripheral/int/processor/int_p32xxxx.h:
-
-../../../../framework/peripheral/int/plib_int_private_pic32.h:
-
-../../../../framework/peripheral/int/processor/int_p32mz1024efk144.h:
-
-../../../../framework/peripheral/int/processor/../templates/int_SingleVectorShadowSet_Default.h:
-
-../../../../framework/peripheral/int/processor/../templates/int_VectorSelect_Default.h:
-
-../../../../framework/peripheral/int/processor/../templates/int_ProximityTimerEnable_Default.h:
-
-../../../../framework/peripheral/int/processor/../templates/int_ProximityTimerControl_Default.h:
-
-../../../../framework/peripheral/int/processor/../templates/int_ExternalINTEdgeSelect_Default.h:
-
-../../../../framework/peripheral/int/processor/../templates/int_INTCPUPriority_Default.h:
-
-../../../../framework/peripheral/int/processor/../templates/int_INTCPUVector_Default.h:
-
-../../../../framework/peripheral/int/processor/../templates/int_SourceFlag_Default.h:
-
-../../../../framework/peripheral/int/processor/../templates/int_SourceControl_Default.h:
-
-../../../../framework/peripheral/int/processor/../templates/int_VectorPriority_Default.h:
-
-../../../../framework/peripheral/int/processor/../templates/int_CPUCurrentPriorityLevel_Default.h:
-
-../../../../framework/peripheral/int/processor/../templates/int_EnableControl_PIC32.h:
-
-../../../../framework/peripheral/int/processor/../templates/int_ShadowRegisterAssign_Default.h:
-
-../../../../framework/peripheral/int/processor/../templates/int_VariableOffset_Default.h:
-
-../../../../framework/peripheral/int/processor/../templates/int_SoftwareNMI_Default.h:
-
-../../../../framework/system/int/sys_int_mapping.h:
-
-../src/system_config/default/framework/driver/adc/drv_adc_static.h:
-
-../../../../framework/peripheral/adchs/plib_adchs.h:
-
-../../../../framework/peripheral/adchs/processor/adchs_processor.h:
-
-../../../../framework/peripheral/adchs/processor/adchs_p32xxxx.h:
-
-../../../../framework/peripheral/adchs/processor/adchs_p32mz1024efk144.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_Registers_PIC32MZ_EF.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_EnableControl_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_TurboMode_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_DigitalComparator_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_DigitalFilter_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_FIFO_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_DMA_Unsupported.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_CVD_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_VREFControl_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_AnalogInputScan_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_AnalogFeatureControl_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_DigitalFeatureControl_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_AnalogInputModeControl_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_TriggerControl_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_ChannelTriggerSampleControl_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_EarlyInterruptControl_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_ManualControl_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_UpdateReadyControl_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_InputControl_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_ExternalConversionRequest_Unsupported.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_Setup_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_AnalogInputCheck_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_ChannelConfiguration_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_ConversionResult_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_ScanEnable_Unsupported.h:
-
 ../../../../framework/system/ports/sys_ports.h:
 
 ../../../../framework/system/ports/sys_ports_definitions.h:
@@ -500,96 +526,78 @@ build/default/debug/_ext/1360937237/ADS1261.o: ../src/ADS1261.c \
 
 ../../../../framework/peripheral/ports/plib_ports_compatibility.h:
 
+../src/Delay.h:
+
+../src/app.h:
+
+../src/system_config/default/system_definitions.h:
+
+../../../../framework/system/devcon/sys_devcon.h:
+
+../../../../framework/system/system.h:
+
+../src/system_config/default/framework/driver/adc/drv_adc_static.h:
+
+../../../../framework/peripheral/adchs/plib_adchs.h:
+
+../../../../framework/peripheral/adchs/processor/adchs_processor.h:
+
+../../../../framework/peripheral/adchs/processor/adchs_p32xxxx.h:
+
+../../../../framework/peripheral/adchs/processor/adchs_p32mz1024efk144.h:
+
+../../../../framework/peripheral/adchs/processor/../templates/adchs_Registers_PIC32MZ_EF.h:
+
+../../../../framework/peripheral/adchs/processor/../templates/adchs_EnableControl_Default.h:
+
+../../../../framework/peripheral/adchs/processor/../templates/adchs_TurboMode_Default.h:
+
+../../../../framework/peripheral/adchs/processor/../templates/adchs_DigitalComparator_Default.h:
+
+../../../../framework/peripheral/adchs/processor/../templates/adchs_DigitalFilter_Default.h:
+
+../../../../framework/peripheral/adchs/processor/../templates/adchs_FIFO_Default.h:
+
+../../../../framework/peripheral/adchs/processor/../templates/adchs_DMA_Unsupported.h:
+
+../../../../framework/peripheral/adchs/processor/../templates/adchs_CVD_Default.h:
+
+../../../../framework/peripheral/adchs/processor/../templates/adchs_VREFControl_Default.h:
+
+../../../../framework/peripheral/adchs/processor/../templates/adchs_AnalogInputScan_Default.h:
+
+../../../../framework/peripheral/adchs/processor/../templates/adchs_AnalogFeatureControl_Default.h:
+
+../../../../framework/peripheral/adchs/processor/../templates/adchs_DigitalFeatureControl_Default.h:
+
+../../../../framework/peripheral/adchs/processor/../templates/adchs_AnalogInputModeControl_Default.h:
+
+../../../../framework/peripheral/adchs/processor/../templates/adchs_TriggerControl_Default.h:
+
+../../../../framework/peripheral/adchs/processor/../templates/adchs_ChannelTriggerSampleControl_Default.h:
+
+../../../../framework/peripheral/adchs/processor/../templates/adchs_EarlyInterruptControl_Default.h:
+
+../../../../framework/peripheral/adchs/processor/../templates/adchs_ManualControl_Default.h:
+
+../../../../framework/peripheral/adchs/processor/../templates/adchs_UpdateReadyControl_Default.h:
+
+../../../../framework/peripheral/adchs/processor/../templates/adchs_InputControl_Default.h:
+
+../../../../framework/peripheral/adchs/processor/../templates/adchs_ExternalConversionRequest_Unsupported.h:
+
+../../../../framework/peripheral/adchs/processor/../templates/adchs_Setup_Default.h:
+
+../../../../framework/peripheral/adchs/processor/../templates/adchs_AnalogInputCheck_Default.h:
+
+../../../../framework/peripheral/adchs/processor/../templates/adchs_ChannelConfiguration_Default.h:
+
+../../../../framework/peripheral/adchs/processor/../templates/adchs_ConversionResult_Default.h:
+
+../../../../framework/peripheral/adchs/processor/../templates/adchs_ScanEnable_Unsupported.h:
+
 ../../../../framework/driver/spi/drv_spi.h:
 
 ../../../../framework/driver/spi/drv_spi_definitions.h:
-
-../../../../framework/peripheral/spi/plib_spi.h:
-
-../../../../framework/peripheral/spi/processor/spi_processor.h:
-
-../../../../framework/peripheral/spi/processor/spi_p32xxxx.h:
-
-../../../../framework/peripheral/spi/processor/spi_p32mz1024efk144.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_EnableControl_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_registers.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_StopInIdle_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_ReceiverOverflow_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_TransmitBufferFullStatus_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_TransmitBufferEmptyStatus_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_ReceiveBufferStatus_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_PinControl_PIC32.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_CommunicationWidth_PIC32.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_AudioCommunicationWidth_PIC32.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_InputSamplePhase_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_OutputDataPhase_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_ClockPolarity_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_MasterControl_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_BaudRate_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_BusStatus_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_ReadDataSignStatus_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_SlaveSelectControl_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_TransmitUnderRunStatus_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_FIFOControl_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_FIFOCount_PIC32.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_ReceiveFIFOStatus_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_FIFOShiftRegisterEmptyStatus_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_FIFOInterruptMode_PIC32.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_FramedCommunication_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_FrameSyncPulseDirection_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_FrameSyncPulsePolarity_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_FrameSyncPulseEdge_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_FrameSyncPulseWidth_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_FrameSyncPulseCounter_PIC32.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_FrameErrorStatus_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_Buffer_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_BaudRateClock_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_ErrorInterruptControl_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_AudioErrorControl_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_AudioProtocolControl_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_AudioTransmitMode_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_AudioProtocolMode_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_Buffer32bit_Default.h:
-
-../../../../framework/peripheral/spi/processor/../templates/spi_Buffer16bit_Default.h:
 
 ../src/app.h:

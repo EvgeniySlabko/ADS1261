@@ -134,12 +134,12 @@
       <Template dnOrder="0">
         <Name dnOrder="0">sys_ports_static.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/system/ports/src</Path>
-        <Checksum dnOrder="2">7D41DD7761B573B6D96A959373C0F86E</Checksum>
+        <Checksum dnOrder="2">65B70890DAA5DA3DD55A7C3BACC5DB6F</Checksum>
       </Template>
       <Template dnOrder="1">
         <Name dnOrder="0">system_init.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">02ED98ED2C63D4039F4C7A5AE78F21BE</Checksum>
+        <Checksum dnOrder="2">8B802CAEF831E75E67762C7F61B1769A</Checksum>
       </Template>
       <Template dnOrder="2">
         <Name dnOrder="0">sys_devcon_cache.h</Name>
@@ -216,7 +216,7 @@
       <Template dnOrder="16">
         <Name dnOrder="0">system_config.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">5BE155BA6B7B295C522F6F860A4E6649</Checksum>
+        <Checksum dnOrder="2">00097A724825F65D71D55A643428D006</Checksum>
       </Template>
       <Template dnOrder="17">
         <Name dnOrder="0">app.h</Name>

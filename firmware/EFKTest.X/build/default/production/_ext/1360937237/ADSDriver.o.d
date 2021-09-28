@@ -1,7 +1,7 @@
-build/default/production/_ext/1360937237/ADS1261.o: ../src/ADS1261.c \
- ../src/ADS1261.h ../../../../framework/driver/driver.h \
+build/default/production/_ext/1360937237/ADSDriver.o: ../src/ADSDriver.c \
+ ../src/ADSDriver.h ../src/ADS1261.h \
+ ../../../../framework/driver/driver.h \
  ../../../../framework/driver/driver_common.h ../src/ADSConfigurations.h \
- ../src/ADSDriver.h \
  ../../../../framework/driver/spi/drv_spi_definitions.h \
  ../src/system_config/default/system_config.h \
  ../../../../framework/peripheral/spi/plib_spi.h \
@@ -160,43 +160,9 @@ build/default/production/_ext/1360937237/ADS1261.o: ../src/ADS1261.c \
  ../../../../framework/peripheral/ports/processor/../templates/ports_ChannelChangeNoticeMethod_Default.h \
  ../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeControl_Default.h \
  ../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Default.h \
- ../../../../framework/peripheral/ports/plib_ports_compatibility.h \
- ../src/Delay.h ../src/app.h \
- ../src/system_config/default/system_definitions.h \
- ../../../../framework/system/devcon/sys_devcon.h \
- ../../../../framework/system/system.h \
- ../src/system_config/default/framework/driver/adc/drv_adc_static.h \
- ../../../../framework/peripheral/adchs/plib_adchs.h \
- ../../../../framework/peripheral/adchs/processor/adchs_processor.h \
- ../../../../framework/peripheral/adchs/processor/adchs_p32xxxx.h \
- ../../../../framework/peripheral/adchs/processor/adchs_p32mz1024efk144.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_Registers_PIC32MZ_EF.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_EnableControl_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_TurboMode_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_DigitalComparator_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_DigitalFilter_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_FIFO_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_DMA_Unsupported.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_CVD_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_VREFControl_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_AnalogInputScan_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_AnalogFeatureControl_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_DigitalFeatureControl_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_AnalogInputModeControl_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_TriggerControl_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_ChannelTriggerSampleControl_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_EarlyInterruptControl_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_ManualControl_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_UpdateReadyControl_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_InputControl_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_ExternalConversionRequest_Unsupported.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_Setup_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_AnalogInputCheck_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_ChannelConfiguration_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_ConversionResult_Default.h \
- ../../../../framework/peripheral/adchs/processor/../templates/adchs_ScanEnable_Unsupported.h \
- ../../../../framework/driver/spi/drv_spi.h \
- ../../../../framework/driver/spi/drv_spi_definitions.h ../src/app.h
+ ../../../../framework/peripheral/ports/plib_ports_compatibility.h
+
+../src/ADSDriver.h:
 
 ../src/ADS1261.h:
 
@@ -205,8 +171,6 @@ build/default/production/_ext/1360937237/ADS1261.o: ../src/ADS1261.c \
 ../../../../framework/driver/driver_common.h:
 
 ../src/ADSConfigurations.h:
-
-../src/ADSDriver.h:
 
 ../../../../framework/driver/spi/drv_spi_definitions.h:
 
@@ -525,79 +489,3 @@ build/default/production/_ext/1360937237/ADS1261.o: ../src/ADS1261.c \
 ../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Default.h:
 
 ../../../../framework/peripheral/ports/plib_ports_compatibility.h:
-
-../src/Delay.h:
-
-../src/app.h:
-
-../src/system_config/default/system_definitions.h:
-
-../../../../framework/system/devcon/sys_devcon.h:
-
-../../../../framework/system/system.h:
-
-../src/system_config/default/framework/driver/adc/drv_adc_static.h:
-
-../../../../framework/peripheral/adchs/plib_adchs.h:
-
-../../../../framework/peripheral/adchs/processor/adchs_processor.h:
-
-../../../../framework/peripheral/adchs/processor/adchs_p32xxxx.h:
-
-../../../../framework/peripheral/adchs/processor/adchs_p32mz1024efk144.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_Registers_PIC32MZ_EF.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_EnableControl_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_TurboMode_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_DigitalComparator_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_DigitalFilter_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_FIFO_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_DMA_Unsupported.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_CVD_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_VREFControl_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_AnalogInputScan_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_AnalogFeatureControl_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_DigitalFeatureControl_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_AnalogInputModeControl_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_TriggerControl_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_ChannelTriggerSampleControl_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_EarlyInterruptControl_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_ManualControl_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_UpdateReadyControl_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_InputControl_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_ExternalConversionRequest_Unsupported.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_Setup_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_AnalogInputCheck_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_ChannelConfiguration_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_ConversionResult_Default.h:
-
-../../../../framework/peripheral/adchs/processor/../templates/adchs_ScanEnable_Unsupported.h:
-
-../../../../framework/driver/spi/drv_spi.h:
-
-../../../../framework/driver/spi/drv_spi_definitions.h:
-
-../src/app.h:

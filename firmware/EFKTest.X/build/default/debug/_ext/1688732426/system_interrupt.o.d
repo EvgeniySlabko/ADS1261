@@ -196,7 +196,11 @@ build/default/debug/_ext/1688732426/system_interrupt.o: \
  ../../../../framework/peripheral/spi/processor/../templates/spi_Buffer16bit_Default.h \
  ../src/system_config/default/system_definitions.h ../src/Delay.h \
  ../src/system_config/default/../default/../../ADS1261.h \
- ../../../../framework/driver/driver.h
+ ../../../../framework/driver/driver.h \
+ ../src/system_config/default/../default/../../ADSConfigurations.h \
+ ../src/system_config/default/../default/../../ADSDriver.h \
+ ../src/system_config/default/../default/../../ADS1261.h \
+ ../../../../framework/driver/spi/drv_spi_definitions.h
 
 ../../../../framework/system/common/sys_common.h:
 
@@ -595,3 +599,11 @@ build/default/debug/_ext/1688732426/system_interrupt.o: \
 ../src/system_config/default/../default/../../ADS1261.h:
 
 ../../../../framework/driver/driver.h:
+
+../src/system_config/default/../default/../../ADSConfigurations.h:
+
+../src/system_config/default/../default/../../ADSDriver.h:
+
+../src/system_config/default/../default/../../ADS1261.h:
+
+../../../../framework/driver/spi/drv_spi_definitions.h:
