@@ -167,7 +167,7 @@ void APP_Tasks ( void )
             DelayInMillisecond(100);
             ads_handle = Init_ADS1261(appData.handleSPI0, &LATD, (uint32_t)0b1000000000000);
             //DelayInMillisecond(100);
-            //SetOffset(ads_handle, 0xFFFFFF);
+            //SetOffset(ads_handle, 1000000);
             //Stop(appData.handleSPI0);
             //Reset(appData.handleSPI0);
             //DelayInMillisecond(1000);
@@ -196,10 +196,20 @@ void APP_Tasks ( void )
 
                 //DelayInMillisecond(1);
                 //dataArr[j++] = ReadData(ads_handle);
+            uint8_t k = 0;
 
-                //DelayInMillisecond(1);
+               DelayInMillisecond(50);
+                dataArr[j++] = ReadData(ads_handle); 
+                dataArr[j++] = ReadData(ads_handle);
                 //dataArr[j++] = ReadData(ads_handle);
+                //ataArr[j++] = ReadData(ads_handle);
+                //DelayInMillisecond(1);
+                //dataArr[j++] = ReadData(ads_handle); 
+            
                 
+
+                RED = 0;
+            GREEN = 1;
                 //uint32_t data = ReadData(ads_handle);
                 //dataArr[j++] = data;
             //}

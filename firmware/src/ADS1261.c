@@ -156,16 +156,16 @@ void WriteRegisterByte(DRV_HANDLE adsHandle, uint8_t address, uint8_t data)
     DRV_SPI_BUFFER_HANDLE bufferHandle = DRV_SPI_BufferAddWriteRead2(currentContext->spiHandle, query, 3, response, 3, TransmitComplete, 0, &(currentContext->bufferHandle));
     if (bufferHandle == DRV_SPI_BUFFER_HANDLE_INVALID)
     {
-        currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_ERROR;
         TransmitError(adsHandle);
     }
+    
+    //DelayInMillisecond(10);
 }
 
 uint8_t ReadRegisterByte(DRV_HANDLE adsHandle, uint8_t address)
 {
     currentHandle = adsHandle;
-    while(currentContext->bufferHandle == DRV_SPI_BUFFER_EVENT_PROCESSING){}
-    currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_PROCESSING;
+    TestForBusy(adsHandle);
     
     UnSetCS();
     uint8_t response[3];
@@ -177,7 +177,6 @@ uint8_t ReadRegisterByte(DRV_HANDLE adsHandle, uint8_t address)
     DRV_SPI_BUFFER_HANDLE bufferHandle = DRV_SPI_BufferAddWriteRead2(currentContext->spiHandle, query, 3, response, 3, TransmitComplete, 0, &(currentContext->bufferHandle));     
     if (bufferHandle == DRV_SPI_BUFFER_HANDLE_INVALID)
     {
-        currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_ERROR;
         TransmitError(adsHandle);
     }
     return response[2];
@@ -186,8 +185,7 @@ uint8_t ReadRegisterByte(DRV_HANDLE adsHandle, uint8_t address)
 void Start(DRV_HANDLE adsHandle)
 {
     currentHandle = adsHandle;
-    while(currentContext->bufferHandle == DRV_SPI_BUFFER_EVENT_PROCESSING){}
-    currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_PROCESSING;
+    TestForBusy(adsHandle);
     
     UnSetCS();
     uint8_t response[2];
@@ -198,7 +196,6 @@ void Start(DRV_HANDLE adsHandle)
     DRV_SPI_BUFFER_HANDLE bufferHandle = DRV_SPI_BufferAddWriteRead2(currentContext->spiHandle, query, 2, response, 2, TransmitComplete, 0, &(currentContext->bufferHandle)); 
     if (bufferHandle == DRV_SPI_BUFFER_HANDLE_INVALID)
     {
-        currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_ERROR;
         TransmitError(adsHandle);
     }
 }
@@ -206,8 +203,7 @@ void Start(DRV_HANDLE adsHandle)
 void Stop(DRV_HANDLE adsHandle)
 {
     currentHandle = adsHandle;
-    while(currentContext->bufferHandle == DRV_SPI_BUFFER_EVENT_PROCESSING){}
-    currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_PROCESSING;
+    TestForBusy(adsHandle);
     
     UnSetCS();
     uint8_t response[2];
@@ -218,7 +214,6 @@ void Stop(DRV_HANDLE adsHandle)
     DRV_SPI_BUFFER_HANDLE bufferHandle = DRV_SPI_BufferAddWriteRead2(currentContext->spiHandle, query, 2, response, 2, TransmitComplete, 0, &(currentContext->bufferHandle));
     if (bufferHandle == DRV_SPI_BUFFER_HANDLE_INVALID)
     {
-        currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_ERROR;
         TransmitError(adsHandle);
     }
 }
@@ -226,8 +221,7 @@ void Stop(DRV_HANDLE adsHandle)
 void Reset(DRV_HANDLE adsHandle)
 { 
     currentHandle = adsHandle;
-    while(currentContext->bufferHandle == DRV_SPI_BUFFER_EVENT_PROCESSING){}
-    currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_PROCESSING;
+    TestForBusy(adsHandle);
     
     UnSetCS();
     uint8_t response[2];
@@ -238,7 +232,6 @@ void Reset(DRV_HANDLE adsHandle)
     DRV_SPI_BUFFER_HANDLE bufferHandle = DRV_SPI_BufferAddWriteRead2(currentContext->spiHandle, query, 2, response, 2, TransmitComplete, 0, &(currentContext->bufferHandle));  
     if (bufferHandle == DRV_SPI_BUFFER_HANDLE_INVALID)
     {
-        currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_ERROR;
         TransmitError(adsHandle);
     }
 }
@@ -246,10 +239,7 @@ void Reset(DRV_HANDLE adsHandle)
 uint32_t ReadData(DRV_HANDLE adsHandle)
 {
     currentHandle = adsHandle;
-    while(currentContext->bufferHandle == DRV_SPI_BUFFER_EVENT_PROCESSING){}
-    currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_PROCESSING;
-    
-    //DelayInMillisecond(100);
+    TestForBusy(adsHandle);
     
     UnSetCS();
     uint32_t result;
@@ -265,7 +255,6 @@ uint32_t ReadData(DRV_HANDLE adsHandle)
     if (bufferHandle == DRV_SPI_BUFFER_HANDLE_INVALID)
     {
         TransmitError(adsHandle);
-        currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_ERROR;
     }
     
     result += resultBuf[2];
@@ -289,8 +278,7 @@ void ConfigureDevice(DRV_HANDLE adsHandle)
 void OffsetSelfCalibration(DRV_HANDLE adsHandle)
 {
     currentHandle = adsHandle;
-    while(currentContext->bufferHandle == DRV_SPI_BUFFER_EVENT_PROCESSING){}
-    currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_PROCESSING;
+    TestForBusy(adsHandle);
     
     UnSetCS();
     uint8_t response[2];
@@ -302,7 +290,6 @@ void OffsetSelfCalibration(DRV_HANDLE adsHandle)
     if (bufferHandle == DRV_SPI_BUFFER_HANDLE_INVALID)
     {
         TransmitError(adsHandle);
-        currentContext->bufferHandle = DRV_SPI_BUFFER_EVENT_ERROR;
     }
 }
 
@@ -319,7 +306,7 @@ void TestForBusy(DRV_HANDLE adsHandle)
     currentHandle = adsHandle;
     if (currentContext->bufferHandle != 0)
     {
-        while((DRV_SPI_BufferStatus(currentContext->bufferHandle)) != DRV_SPI_BUFFER_EVENT_COMPLETE){RED = 1;}
+        while((DRV_SPI_BufferStatus(currentContext->bufferHandle)) != DRV_SPI_BUFFER_EVENT_COMPLETE){}
     }
 }
 void SetOffset(DRV_HANDLE adsHandle, uint32_t subtractedValue)
