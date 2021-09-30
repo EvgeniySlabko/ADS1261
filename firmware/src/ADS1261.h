@@ -13,8 +13,6 @@
 //#define CS_PIN                          PORTDbits.RD12 
 
 extern bool calibration;
-extern bool wasData;
-
 uint8_t ReadRegisterByte(DRV_HANDLE adsHandle, uint8_t address);
 DRV_HANDLE Init_ADS1261(DRV_HANDLE spiHandle, volatile uint32_t *cs_lat_potr, volatile uint32_t cs_pin_mask);
 void WriteRegisterByte(DRV_HANDLE adsHandle, uint8_t address, uint8_t data);
@@ -27,7 +25,7 @@ uint32_t ReadData(DRV_HANDLE adsHandle);
 bool ReadDataIfExists(DRV_HANDLE adsHandle, uint32_t *data);
 void SetOffset(DRV_HANDLE adsHandle, uint32_t offset);
 void TransmitError(DRV_HANDLE adsHandle);
-void DRDYHandler();
+void DRDYHandler(DRV_HANDLE adsHandle);
 void TestForBusy(DRV_HANDLE adsHandle);
 
 //GLx

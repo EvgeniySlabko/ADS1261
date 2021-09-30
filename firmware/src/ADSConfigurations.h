@@ -2,23 +2,38 @@
 #define	CONFIGURATIONS_H
 
 //Register addreses
-#define ID_ADDR                         0x00
-#define STATUS_ADDR                     0x01
-#define MODE0_ADDR                      0x02
-#define MODE1_ADDR                      0x03
-#define MODE2_ADDR                      0x04
-#define MODE3_ADDR                      0x05
-#define REF_ADDR                        0x06
+#define ADS_ID_ADDR                     0x00
+#define ADS_STATUS_ADDR                 0x01
+#define ADS_MODE0_ADDR                  0x02
+#define ADS_MODE1_ADDR                  0x03
+#define ADS_MODE2_ADDR                  0x04
+#define ADS_MODE3_ADDR                  0x05
+#define ADS_REF_ADDR                    0x06
+#define ADS_OFCAL0_ADDR                 0x07
+#define ADS_OFCAL1_ADDR                 0x08
+#define ADS_OFCAL2_ADDR                 0x09
+#define ADS_FSCAL0_ADDR                 0x0A
+#define ADS_FSCAL1_ADDR                 0x0B
+#define ADS_FSCAL2_ADDR                 0x0C
+#define ADS_IMUX_ADDR                   0x0D
+#define ADS_IMAG_ADDR                   0x0E
+#define ADS_PGA_ADDR                    0x10
+#define ADS_INPMUX_ADDR                 0x11
+#define ADS_INPBIAS_ADDR                0x12
 
-#define OFCAL0_ADDR                     0x07
-#define OFCAL1_ADDR                     0x08
-#define OFCAL2_ADDR                     0x09
-
-#define FSCAL0_ADDR                     0x0A
-#define FSCAL1_ADDR                     0x0B
-#define FSCAL2_ADDR                     0x0C
-#define PGA_ADDR                        0x10
-#define INPMUX_ADDR                     0x11
+// Commands
+#define ADS_NOP                         0x00
+#define ADS_RESET                       0x06
+#define ADS_START                       0x08
+#define ADS_STOP                        0x0A
+#define ADS_RDATA                       0x12
+#define ADS_SYOCAL                      0x16
+#define ADS_GANCAL                      0x17
+#define ADS_SFOCAL                      0x19
+#define ADS_RREG                        0x20
+#define ADS_WREG                        0x40
+#define ADS_LOCK                        0xF2
+#define ADS_UNLOCK                      0xF5
 
 typedef struct Mode0 {
     unsigned filter: 3;
@@ -134,16 +149,6 @@ typedef struct ADSInitData
 #define DF4 0b011       // sinc4
 #define DF5 0b100       // FIR (default)
 
-//Chop mode
-//#define 0b00    // Normal mode (default)
-//#define 0b01    // Chop mode
-//#define 0b10    // 2-wire AC-excitation mode ( ADS1261 only)
-//#define 0b11    // 4-wire AC-excitation mode ( ADS1261 only)
-
-//Conversation mode
-//#define 0: Continuous conversions (default)
-//#define 1: Pulse (one shot) conversion
-
 //Conversation start delay 
 #define CD1 0000 // 0 µs (not for 25600 SPS or 40000 SPS operation)
 #define CD2 0001 //  50 µs (default)
@@ -161,7 +166,7 @@ typedef struct ADSInitData
 #define CD14 1101 //  17.8 ms
 
 //Select the gain.
-#define GL1  0b000  //: 1 (default)
+#define GL1 0b000  //: 1 (default)
 #define GL2 0b001   //: 2
 #define GL3 0b010   //: 4
 #define GL4 0b011   //: 8

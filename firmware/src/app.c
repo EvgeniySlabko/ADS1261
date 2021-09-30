@@ -80,10 +80,10 @@ uint32_t dataArr[300];
 uint8_t i = 0;
 uint8_t j = 0;
 uint8_t status;
-DRV_HANDLE ads_handle;
 uint32_t calVal = 0;
 bool flag = false;
 uint32_t data;
+DRV_HANDLE ads_handle;
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Callback Functions

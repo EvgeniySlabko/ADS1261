@@ -274,16 +274,16 @@ uint32_t ReadData(DRV_HANDLE adsHandle)
 void ConfigureDevice(DRV_HANDLE adsHandle)
 {   
     ADSContext *context = (ADSContext *)adsHandle;
-    WriteRegisterByte(adsHandle, MODE0_ADDR, *(uint8_t*) &(context->adsInitData.mode0));
-    WriteRegisterByte(adsHandle, MODE2_ADDR, *(uint8_t*) &(context->adsInitData.mode2));
-    WriteRegisterByte(adsHandle, REF_ADDR, *(uint8_t*) &(context->adsInitData.ref));
-    WriteRegisterByte(adsHandle, PGA_ADDR, *(uint8_t*) &(context->adsInitData.pga));
-    WriteRegisterByte(adsHandle, INPMUX_ADDR, *(uint8_t*) &(context->adsInitData.inpmux));
-    WriteRegisterByte(adsHandle, MODE1_ADDR, *(uint8_t*) &(context->adsInitData.mode1));
+    WriteRegisterByte(adsHandle, ADS_MODE0_ADDR, *(uint8_t*) &(context->adsInitData.mode0));
+    WriteRegisterByte(adsHandle, ADS_MODE2_ADDR, *(uint8_t*) &(context->adsInitData.mode2));
+    WriteRegisterByte(adsHandle, ADS_REF_ADDR, *(uint8_t*) &(context->adsInitData.ref));
+    WriteRegisterByte(adsHandle, ADS_PGA_ADDR, *(uint8_t*) &(context->adsInitData.pga));
+    WriteRegisterByte(adsHandle, ADS_INPMUX_ADDR, *(uint8_t*) &(context->adsInitData.inpmux));
+    WriteRegisterByte(adsHandle, ADS_MODE1_ADDR, *(uint8_t*) &(context->adsInitData.mode1));
     
-    WriteRegisterByte(adsHandle, OFCAL0_ADDR, context->adsInitData.ofScaleL);
-    WriteRegisterByte(adsHandle, OFCAL1_ADDR, context->adsInitData.ofScaleM);
-    WriteRegisterByte(adsHandle, OFCAL2_ADDR, context->adsInitData.ofScaleH);
+    WriteRegisterByte(adsHandle, ADS_OFCAL0_ADDR, context->adsInitData.ofScaleL);
+    WriteRegisterByte(adsHandle, ADS_OFCAL1_ADDR, context->adsInitData.ofScaleM);
+    WriteRegisterByte(adsHandle, ADS_OFCAL2_ADDR, context->adsInitData.ofScaleH);
 }
 
 void CalibrationFinish(DRV_SPI_BUFFER_EVENT event, DRV_SPI_BUFFER_HANDLE bufferHandle, void * context)
@@ -357,13 +357,14 @@ void SetOffset(DRV_HANDLE adsHandle, uint32_t subtractedValue)
 
 bool ReadDataIfExists(DRV_HANDLE adsHandle, uint32_t *data)
 {
-    if (!wasData)
+    ADSContext *context = (ADSContext *)adsHandle;
+    if (!context->wasData)
     {
         data = NULL;
         return false;
     }
     
-    wasData = false;
+    context->wasData = false;
     *data = ReadData(adsHandle);
     return true;
 }
@@ -382,12 +383,10 @@ void SetDigitalFilter(DRV_HANDLE adsHandle, unsigned filter)
   ConfigureDevice(adsHandle);
 }
 
-void DRDYHandler()
+void DRDYHandler(DRV_HANDLE adsHandle)
 {
-    //RED = ~RED;
-    //if (!calibration)
-    //{
-        wasData = true;
-    //}
-    
+    if (adsHandle == 0) return;
+    ADSContext *context = (ADSContext *)adsHandle;
+    context->wasData = true;
+
 }

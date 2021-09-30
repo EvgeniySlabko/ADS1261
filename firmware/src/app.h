@@ -71,6 +71,7 @@ typedef enum
     APP_SPI_STATE_DONE
 } APP_SPI_STATES;
 
+extern DRV_HANDLE ads_handle;
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
 

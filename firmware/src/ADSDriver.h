@@ -23,6 +23,7 @@ typedef struct ADSContext
     volatile uint32_t *csPort;
     uint32_t csPinMask;
     DRV_SPI_BUFFER_EVENT bufferHandle;     //current buffer state
+    bool wasData;
     
 } ADSContext;
 
