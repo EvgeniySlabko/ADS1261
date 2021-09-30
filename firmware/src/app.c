@@ -81,6 +81,9 @@ uint8_t i = 0;
 uint8_t j = 0;
 uint8_t status;
 DRV_HANDLE ads_handle;
+uint32_t calVal = 0;
+bool flag = false;
+uint32_t data;
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Callback Functions
@@ -138,6 +141,21 @@ void APP_Initialize ( void )
   Remarks:
     See prototype in app.h.
  */
+void Button_Task()
+{
+    if (!BUTTON)
+    {
+        if (true)
+        {
+            //SetOffset(ads_handle, calVal++);
+            OffsetSelfCalibration(ads_handle);
+            flag =  true;
+        }
+        
+        //DelayInMillisecond(1000);
+    }
+    
+}
 
 void APP_Tasks ( void )
 {
@@ -166,8 +184,10 @@ void APP_Tasks ( void )
             
             DelayInMillisecond(100);
             ads_handle = Init_ADS1261(appData.handleSPI0, &LATD, (uint32_t)0b1000000000000);
+            //SetOffset(ads_handle, 0x555555);
+            //Unlock(ads_handle);
             //DelayInMillisecond(100);
-            //SetOffset(ads_handle, 1000000);
+            
             //Stop(appData.handleSPI0);
             //Reset(appData.handleSPI0);
             //DelayInMillisecond(1000);
@@ -184,37 +204,17 @@ void APP_Tasks ( void )
         case APP_STATE_SERVICE_TASKS:
         {
             
-            //uint8_t data;
-            //LATAbits.LATA5 = 1;
-            //RED = 1;
-            //ReadRegisterByte(appData.handleSPI0, STATUS_ADDR, );
-            //ReadRegisterByte(appData.handleSPI0, uint8_t address, uint8_t *data)
+            DelayInMillisecond(30);
+            //Button_Task();
             //ReadData(ads_handle);
-            //for (j = 0; j < 100; j++)
-            //{
+            //uint8_t reg = ReadRegisterByte(ads_handle, OFCAL0_ADDR);
+            //OffsetSelfCalibration(ads_handle);
             
-
-                //DelayInMillisecond(1);
-                //dataArr[j++] = ReadData(ads_handle);
-            uint8_t k = 0;
-
-               DelayInMillisecond(50);
-                dataArr[j++] = ReadData(ads_handle); 
-                dataArr[j++] = ReadData(ads_handle);
-                //dataArr[j++] = ReadData(ads_handle);
-                //ataArr[j++] = ReadData(ads_handle);
-                //DelayInMillisecond(1);
-                //dataArr[j++] = ReadData(ads_handle); 
+            if (ReadDataIfExists(ads_handle, &data))
+            {
+                RED = ~RED;
+            }
             
-                
-
-                RED = 0;
-            GREEN = 1;
-                //uint32_t data = ReadData(ads_handle);
-                //dataArr[j++] = data;
-            //}
-            
-            //RED = 1;
             
         }
         /* TODO: implement your application state machine.*/

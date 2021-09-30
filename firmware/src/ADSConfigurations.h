@@ -100,7 +100,11 @@ typedef struct ADSInitData
     IMag imag;
     PGA pga;
     InpMux inpmux;
-    InpBias inpbias ;
+    InpBias inpbias;
+    
+    uint8_t ofScaleL;
+    uint8_t ofScaleM;
+    uint8_t ofScaleH;
     
 } ADSInitData;
 
@@ -155,5 +159,17 @@ typedef struct ADSInitData
 #define CD12 1011 //  4.49 ms
 #define CD13 1100 //  8.93 ms
 #define CD14 1101 //  17.8 ms
+
+//Select the gain.
+#define GL1  0b000  //: 1 (default)
+#define GL2 0b001   //: 2
+#define GL3 0b010   //: 4
+#define GL4 0b011   //: 8
+#define GL5 0b100   //: 16
+#define GL6 0b101   //: 32
+#define GL7 0b110   //: 64
+#define GL8 0b111   //: 128
+
+
 #endif	/* CONFIGURATIONS_H */
 

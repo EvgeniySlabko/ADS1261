@@ -1,7 +1,7 @@
 #include "ADSDriver.h"
 
 uint8_t instanceCount = 0;
-DRV_HANDLE currentHandle;
+//DRV_HANDLE currentHandle;
 DRV_HANDLE Deinitialize(DRV_HANDLE handle)
 {
     int i;
@@ -39,13 +39,12 @@ DRV_HANDLE GetInstance()
     return DRV_HANDLE_INVALID;
 }
 
-void UnSetCS()
+void UnSetCS(ADSContext *context)
 {
-
-    *(currentContext->csPort) &= ~(currentContext->csPinMask);
+    *(context->csPort) &= ~(context->csPinMask);
 }
 
-void SetCS()
+void SetCS(ADSContext *context)
 {
-    *(currentContext->csPort) |= currentContext->csPinMask;
+    *(context->csPort) |= (context->csPinMask);
 }

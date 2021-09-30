@@ -60,8 +60,9 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system_definitions.h"
 
 
-#define GREEN       PORTCbits.RC1
-#define RED         PORTAbits.RA5
+#define GREEN       LATCbits.LATC1
+#define RED         LATAbits.LATA5
+#define BUTTON      PORTBbits.RB12
 
 typedef enum
 {
@@ -216,6 +217,10 @@ void APP_Initialize ( void );
  */
 
 void APP_Tasks( void );
+
+
+
+void Button_Task();
 
 
 #endif /* _APP_H */

@@ -12,7 +12,6 @@
 //typedef uint32_t ADS_HANDLE;
 
 #define MAX_INSTANCES 5
-#define currentContext ((ADSContext *)currentHandle)
 
 typedef struct ADSContext
 {
@@ -32,8 +31,8 @@ extern uint8_t instanceCount;
 extern DRV_HANDLE currentHandle;
 
 DRV_HANDLE GetInstance();
-void SetCS();
-void UnSetCS();
+void SetCS(ADSContext *context);
+void UnSetCS(ADSContext *context);
 DRV_HANDLE Deinitialize(DRV_HANDLE handle);
 #endif	/* ADSDRIVER_H */
 
