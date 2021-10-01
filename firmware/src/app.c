@@ -148,7 +148,7 @@ void Button_Task()
         if (true)
         {
             //SetOffset(ads_handle, calVal++);
-            OffsetSelfCalibration(ads_handle);
+            GainfCalibration(ads_handle);
             flag =  true;
         }
         

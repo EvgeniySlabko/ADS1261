@@ -27,6 +27,7 @@ void SetOffset(DRV_HANDLE adsHandle, uint32_t offset);
 void TransmitError(DRV_HANDLE adsHandle);
 void DRDYHandler(DRV_HANDLE adsHandle);
 void TestForBusy(DRV_HANDLE adsHandle);
+void GainfCalibration(DRV_HANDLE adsHandle);
 
 //GLx
 void SetGain(DRV_HANDLE adsHandle, unsigned gainValue);

@@ -311,30 +311,51 @@ void Unlock(DRV_HANDLE adsHandle)
         TransmitError(adsHandle);
     }
 }
+
 void OffsetSelfCalibration(DRV_HANDLE adsHandle)
 {
     ADSContext *context = (ADSContext *)adsHandle;
-    //Unlock(adsHandle);
-    //calibration = true; 
-    //Start(adsHandle);
+    Unlock(adsHandle);
+    TestForBusy(adsHandle);
     UnSetCS(context);
-    //TestForBusy(adsHandle);
+    
     uint8_t response[2];
     uint8_t query[2];
     query[0] = 0x19;
     query[1] = 0x00;
 
     DRV_SPI_BUFFER_HANDLE bufferHandle = DRV_SPI_BufferAddWriteRead2(context->spiHandle, query, 2, response, 2, 0, 0, &(context->bufferHandle));
-     
-    RED = 0;
-    GREEN = 1;
     if (bufferHandle == DRV_SPI_BUFFER_HANDLE_INVALID)
     {
         TransmitError(adsHandle);
     }
-    //DelayInMillisecond(40);
+
     context->wasData = false;
     TestForBusy(adsHandle);
+    
+}
+
+void GainfCalibration(DRV_HANDLE adsHandle)
+{
+    ADSContext *context = (ADSContext *)adsHandle;
+    Unlock(adsHandle);
+    TestForBusy(adsHandle);
+    UnSetCS(context);
+    
+    uint8_t response[2];
+    uint8_t query[2];
+    query[0] = 0x17;
+    query[1] = 0x00;
+
+    DRV_SPI_BUFFER_HANDLE bufferHandle = DRV_SPI_BufferAddWriteRead2(context->spiHandle, query, 2, response, 2, 0, 0, &(context->bufferHandle));
+    if (bufferHandle == DRV_SPI_BUFFER_HANDLE_INVALID)
+    {
+        TransmitError(adsHandle);
+    }
+
+    context->wasData = false;
+    TestForBusy(adsHandle);
+    
 }
 
 void TestForBusy(DRV_HANDLE adsHandle)
@@ -367,6 +388,7 @@ bool ReadDataIfExists(DRV_HANDLE adsHandle, uint32_t *data)
         
         
     }  
+    
     context->wasData = false;
     *data = ReadData(adsHandle);
     return true;
@@ -381,9 +403,9 @@ void SetGain(DRV_HANDLE adsHandle, unsigned gainValue)
 
 void SetDigitalFilter(DRV_HANDLE adsHandle, unsigned filter)
 {
-  ADSContext *context = (ADSContext *)adsHandle;
-  context->adsInitData.mode0.filter = filter;
-  ConfigureDevice(adsHandle);
+    ADSContext *context = (ADSContext *)adsHandle;
+    context->adsInitData.mode0.filter = filter;
+    ConfigureDevice(adsHandle);
 }
 
 void DRDYHandler(DRV_HANDLE adsHandle)
