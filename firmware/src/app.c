@@ -204,15 +204,16 @@ void APP_Tasks ( void )
         case APP_STATE_SERVICE_TASKS:
         {
             
-            DelayInMillisecond(30);
-            //Button_Task();
+            DelayInMillisecond(1);
+            Button_Task();
+            
             //ReadData(ads_handle);
             //uint8_t reg = ReadRegisterByte(ads_handle, OFCAL0_ADDR);
             //OffsetSelfCalibration(ads_handle);
             
             if (ReadDataIfExists(ads_handle, &data))
             {
-                RED = ~RED;
+                
             }
             
             
