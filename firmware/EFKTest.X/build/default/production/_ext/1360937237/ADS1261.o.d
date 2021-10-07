@@ -161,7 +161,7 @@ build/default/production/_ext/1360937237/ADS1261.o: ../src/ADS1261.c \
  ../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeControl_Default.h \
  ../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Default.h \
  ../../../../framework/peripheral/ports/plib_ports_compatibility.h \
- ../src/Delay.h ../src/app.h \
+ ../src/ADS_Status.h ../src/Delay.h ../src/app.h \
  ../src/system_config/default/system_definitions.h \
  ../../../../framework/system/devcon/sys_devcon.h \
  ../../../../framework/system/system.h \
@@ -525,6 +525,8 @@ build/default/production/_ext/1360937237/ADS1261.o: ../src/ADS1261.c \
 ../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Default.h:
 
 ../../../../framework/peripheral/ports/plib_ports_compatibility.h:
+
+../src/ADS_Status.h:
 
 ../src/Delay.h:
 

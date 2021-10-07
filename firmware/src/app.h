@@ -72,6 +72,7 @@ typedef enum
 } APP_SPI_STATES;
 
 extern DRV_HANDLE ads_handle;
+extern bool initialize; 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
 
@@ -218,7 +219,6 @@ void APP_Initialize ( void );
  */
 
 void APP_Tasks( void );
-
 
 
 void Button_Task();

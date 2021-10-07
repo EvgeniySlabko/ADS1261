@@ -160,7 +160,8 @@ build/default/debug/_ext/1360937237/main.o: ../src/main.c \
  ../../../../framework/peripheral/ports/processor/../templates/ports_ChannelChangeNoticeMethod_Default.h \
  ../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeControl_Default.h \
  ../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Default.h \
- ../../../../framework/peripheral/ports/plib_ports_compatibility.h
+ ../../../../framework/peripheral/ports/plib_ports_compatibility.h \
+ ../src/ADS_Status.h
 
 ../../../../framework/system/common/sys_module.h:
 
@@ -491,3 +492,5 @@ build/default/debug/_ext/1360937237/main.o: ../src/main.c \
 ../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Default.h:
 
 ../../../../framework/peripheral/ports/plib_ports_compatibility.h:
+
+../src/ADS_Status.h:

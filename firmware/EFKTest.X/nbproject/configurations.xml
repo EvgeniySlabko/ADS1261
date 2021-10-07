@@ -97,6 +97,7 @@
           <itemPath>../src/ADSConfigurations.h</itemPath>
           <itemPath>../src/ADSDriver.h</itemPath>
           <itemPath>../src/ADSDriver.c</itemPath>
+          <itemPath>../src/ADS_Status.h</itemPath>
         </logicalFolder>
         <logicalFolder name="f1" displayName="system_config" projectFiles="true">
           <logicalFolder name="f1" displayName="default" projectFiles="true">

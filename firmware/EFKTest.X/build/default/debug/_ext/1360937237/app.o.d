@@ -195,7 +195,8 @@ build/default/debug/_ext/1360937237/app.o: ../src/app.c ../src/app.h \
  ../../../../framework/peripheral/spi/processor/../templates/spi_Buffer16bit_Default.h \
  ../src/app.h ../src/ADS1261.h ../../../../framework/driver/driver.h \
  ../src/ADSConfigurations.h ../src/ADSDriver.h \
- ../../../../framework/driver/spi/drv_spi_definitions.h ../src/Delay.h
+ ../../../../framework/driver/spi/drv_spi_definitions.h \
+ ../src/ADS_Status.h ../src/Delay.h
 
 ../src/app.h:
 
@@ -598,5 +599,7 @@ build/default/debug/_ext/1360937237/app.o: ../src/app.c ../src/app.h \
 ../src/ADSDriver.h:
 
 ../../../../framework/driver/spi/drv_spi_definitions.h:
+
+../src/ADS_Status.h:
 
 ../src/Delay.h:

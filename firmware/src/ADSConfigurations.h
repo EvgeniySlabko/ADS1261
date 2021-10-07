@@ -9,12 +9,15 @@
 #define ADS_MODE2_ADDR                  0x04
 #define ADS_MODE3_ADDR                  0x05
 #define ADS_REF_ADDR                    0x06
+
 #define ADS_OFCAL0_ADDR                 0x07
 #define ADS_OFCAL1_ADDR                 0x08
 #define ADS_OFCAL2_ADDR                 0x09
+
 #define ADS_FSCAL0_ADDR                 0x0A
 #define ADS_FSCAL1_ADDR                 0x0B
 #define ADS_FSCAL2_ADDR                 0x0C
+
 #define ADS_IMUX_ADDR                   0x0D
 #define ADS_IMAG_ADDR                   0x0E
 #define ADS_PGA_ADDR                    0x10
@@ -120,6 +123,10 @@ typedef struct ADSInitData
     uint8_t ofScaleL;
     uint8_t ofScaleM;
     uint8_t ofScaleH;
+    
+    uint8_t fScaleL;
+    uint8_t fScaleM;
+    uint8_t fScaleH;
     
 } ADSInitData;
 

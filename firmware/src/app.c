@@ -74,7 +74,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 */
 
 APP_DATA appData;
-
+bool initialize = false;
 uint32_t statusArray[256];
 uint32_t dataArr[300];
 uint8_t i = 0;
@@ -84,6 +84,7 @@ uint32_t calVal = 0;
 bool flag = false;
 uint32_t data;
 DRV_HANDLE ads_handle;
+volatile uint32_t fScaleVal = 0; 
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Callback Functions
@@ -147,14 +148,18 @@ void Button_Task()
     {
         if (true)
         {
-            //SetOffset(ads_handle, calVal++);
-            GainfCalibration(ads_handle);
-            flag =  true;
-        }
-        
-        //DelayInMillisecond(1000);
+            //calVal += 10;
+            //SetFScale(ads_handle, calVal);
+            GainCalibration(ads_handle);
+            DelayInMillisecond(1000);
+        }  
     }
     
+}
+
+void OverflowCallback(DRV_HANDLE adsHandle, ADS_OPERATION_STATUS status)
+{
+    if (status == ADS_BUFFER_OVERFLOW) RED = ~RED;
 }
 
 void APP_Tasks ( void )
@@ -184,7 +189,11 @@ void APP_Tasks ( void )
             
             DelayInMillisecond(100);
             ads_handle = Init_ADS1261(appData.handleSPI0, &LATD, (uint32_t)0b1000000000000);
+            SetInvalidResponseCallback(ads_handle, OverflowCallback);
+            initialize = true;
+            //initialize = true;
             //SetOffset(ads_handle, 0x555555);
+            
             //Unlock(ads_handle);
             //DelayInMillisecond(100);
             
@@ -203,28 +212,43 @@ void APP_Tasks ( void )
 
         case APP_STATE_SERVICE_TASKS:
         {
-            
-            DelayInMillisecond(1);
+            //uint8_t data;
+            //DelayInMillisecond();
             Button_Task();
             
             //ReadData(ads_handle);
             //uint8_t reg = ReadRegisterByte(ads_handle, OFCAL0_ADDR);
             //OffsetSelfCalibration(ads_handle);
+            //ReadData(ads_handle);
+            //ReadData(ads_handle);
             
-            if (ReadDataIfExists(ads_handle, &data))
+            uint32_t curData;
+            
+            if (GetData(ads_handle, &curData))
             {
-                
-            }
+                dataArr[j++] = curData;
+                GREEN = ~GREEN;
+            } 
             
+            /*
+            fScaleVal = 0;
+            uint8_t reg;
+            ReadRegisterByte(ads_handle, ADS_FSCAL2_ADDR, &reg);
+            fScaleVal += reg;
+            fScaleVal = fScaleVal << 8;
+            ReadRegisterByte(ads_handle, ADS_FSCAL1_ADDR, &reg);
+            fScaleVal += reg;
+            fScaleVal = fScaleVal << 8;
+            ReadRegisterByte(ads_handle, ADS_FSCAL0_ADDR, &reg);
+            fScaleVal += reg;
+            
+            GREEN = 1;
+             */
             
         }
-        /* TODO: implement your application state machine.*/
         
-
-        /* The default state should never be executed. */
         default:
         {
-            /* TODO: Handle error in application's state machine. */
             break;
         }
     }

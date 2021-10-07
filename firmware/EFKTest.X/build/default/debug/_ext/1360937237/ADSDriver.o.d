@@ -2,6 +2,7 @@ build/default/debug/_ext/1360937237/ADSDriver.o: ../src/ADSDriver.c \
  ../src/ADSDriver.h ../src/ADS1261.h \
  ../../../../framework/driver/driver.h \
  ../../../../framework/driver/driver_common.h ../src/ADSConfigurations.h \
+ ../src/ADS_Status.h \
  ../../../../framework/driver/spi/drv_spi_definitions.h \
  ../src/system_config/default/system_config.h \
  ../../../../framework/peripheral/spi/plib_spi.h \
@@ -171,6 +172,8 @@ build/default/debug/_ext/1360937237/ADSDriver.o: ../src/ADSDriver.c \
 ../../../../framework/driver/driver_common.h:
 
 ../src/ADSConfigurations.h:
+
+../src/ADS_Status.h:
 
 ../../../../framework/driver/spi/drv_spi_definitions.h:
 

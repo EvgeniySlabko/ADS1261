@@ -1,6 +1,7 @@
 #include "ADSDriver.h"
 
 uint8_t instanceCount = 0;
+bool stopReading = false; 
 //DRV_HANDLE currentHandle;
 DRV_HANDLE Deinitialize(DRV_HANDLE handle)
 {
@@ -9,6 +10,7 @@ DRV_HANDLE Deinitialize(DRV_HANDLE handle)
     {
         if (instances[i] == (ADSContext *)handle)
         {
+            instanceCount--;
             free(instances[i]);
             instances[i] = NULL;
             return NULL;
@@ -37,6 +39,21 @@ DRV_HANDLE GetInstance()
     }
     
     return DRV_HANDLE_INVALID;
+}
+
+bool VerifyHande(DRV_HANDLE adsHandle)
+{
+    if (adsHandle == 0) return false;
+    int i;
+    for (i = 0; i < MAX_INSTANCES; i++)
+    {
+        if (instances[i] = (ADSContext *)adsHandle)
+        {
+            return true;
+        }
+    }
+    
+    return false;
 }
 
 void UnSetCS(ADSContext *context)

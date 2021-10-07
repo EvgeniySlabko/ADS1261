@@ -200,7 +200,8 @@ build/default/debug/_ext/1688732426/system_interrupt.o: \
  ../src/system_config/default/../default/../../ADSConfigurations.h \
  ../src/system_config/default/../default/../../ADSDriver.h \
  ../src/system_config/default/../default/../../ADS1261.h \
- ../../../../framework/driver/spi/drv_spi_definitions.h
+ ../../../../framework/driver/spi/drv_spi_definitions.h \
+ ../src/system_config/default/../default/../../ADS_Status.h
 
 ../../../../framework/system/common/sys_common.h:
 
@@ -607,3 +608,5 @@ build/default/debug/_ext/1688732426/system_interrupt.o: \
 ../src/system_config/default/../default/../../ADS1261.h:
 
 ../../../../framework/driver/spi/drv_spi_definitions.h:
+
+../src/system_config/default/../default/../../ADS_Status.h:

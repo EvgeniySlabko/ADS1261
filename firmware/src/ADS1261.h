@@ -7,33 +7,35 @@
 #include <driver/driver.h>
 #include "ADSConfigurations.h"
 #include "ADSDriver.h"
+#include "ADS_Status.h"
 #include <driver/driver_common.h>
 
-//#define DRDY_PIN                        PORTDbits.RD13 
-//#define CS_PIN                          PORTDbits.RD12 
-
-extern bool calibration;
-uint8_t ReadRegisterByte(DRV_HANDLE adsHandle, uint8_t address);
+extern bool stopReading; 
 DRV_HANDLE Init_ADS1261(DRV_HANDLE spiHandle, volatile uint32_t *cs_lat_potr, volatile uint32_t cs_pin_mask);
-void WriteRegisterByte(DRV_HANDLE adsHandle, uint8_t address, uint8_t data);
-void ConfigureDevice(DRV_HANDLE adsHandler);
-void Start(DRV_HANDLE spiHandle);
-void Stop(DRV_HANDLE adsHandle);
-void OffsetSelfCalibration(DRV_HANDLE adsHandle);
-void Reset(DRV_HANDLE adsHandle);
-uint32_t ReadData(DRV_HANDLE adsHandle);
-bool ReadDataIfExists(DRV_HANDLE adsHandle, uint32_t *data);
-void SetOffset(DRV_HANDLE adsHandle, uint32_t offset);
-void TransmitError(DRV_HANDLE adsHandle);
-void DRDYHandler(DRV_HANDLE adsHandle);
+
+ADS_OPERATION_STATUS ReadRegisterByte(DRV_HANDLE adsHandle, uint8_t address, uint8_t *data);
+ADS_OPERATION_STATUS WriteRegisterByte(DRV_HANDLE adsHandle, uint8_t address, uint8_t data);
+ADS_OPERATION_STATUS ConfigureDevice(DRV_HANDLE adsHandler);
+ADS_OPERATION_STATUS Start(DRV_HANDLE spiHandle);
+ADS_OPERATION_STATUS Stop(DRV_HANDLE adsHandle);
+ADS_OPERATION_STATUS OffsetSelfCalibration(DRV_HANDLE adsHandle);
+ADS_OPERATION_STATUS Reset(DRV_HANDLE adsHandle);
+ADS_OPERATION_STATUS ReadData(DRV_HANDLE adsHandle);
+ADS_OPERATION_STATUS SetOffset(DRV_HANDLE adsHandle, uint32_t offset);
+ADS_OPERATION_STATUS DRDYHandler(DRV_HANDLE adsHandle);
 void TestForBusy(DRV_HANDLE adsHandle);
-void GainfCalibration(DRV_HANDLE adsHandle);
+ADS_OPERATION_STATUS GainCalibration(DRV_HANDLE adsHandle);
+
+ADS_OPERATION_STATUS SetFScale(DRV_HANDLE adsHandle, uint32_t fScale);
+ADS_OPERATION_STATUS SetInvalidResponseCallback(DRV_HANDLE adsHandle, void (*InvalidResponseCallback)(DRV_HANDLE adsHandle, ADS_OPERATION_STATUS status));
+ 
+bool GetData(DRV_HANDLE adsHandle, uint32_t *data);
 
 //GLx
-void SetGain(DRV_HANDLE adsHandle, unsigned gainValue);
+ADS_OPERATION_STATUS SetGain(DRV_HANDLE adsHandle, unsigned gainValue);
 
 //DFx
-void SetDigitalFilter(DRV_HANDLE adsHandle, unsigned filter);
+ADS_OPERATION_STATUS SetDigitalFilter(DRV_HANDLE adsHandle, unsigned filter);
 
-void Unlock(DRV_HANDLE adsHandle);
+ADS_OPERATION_STATUS Unlock(DRV_HANDLE adsHandle);
 #endif	/* DEFINITIONS_H */

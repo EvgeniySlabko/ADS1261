@@ -73,8 +73,17 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 bool green = true;
 void __ISR(_EXTERNAL_2_VECTOR, IPL1AUTO) _IntHandlerExternalInterruptInstance0(void)
 {
+    ADS_OPERATION_STATUS status = DRDYHandler(ads_handle);
+    if (status == ADS_COMPLETE)
+    {
+        RED = 0;
+    }
+    else
+    {
+        RED = 1;
+    }
+      
     PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_EXTERNAL_2);
-    DRDYHandler(ads_handle);
 }
  
 void __ISR(_SPI1_RX_VECTOR, ipl1AUTO) _IntHandlerSPIRxInstance0(void)
