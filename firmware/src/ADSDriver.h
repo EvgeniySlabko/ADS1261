@@ -27,8 +27,9 @@ typedef struct ADSContext
     DRV_SPI_BUFFER_EVENT bufferHandle;     //current buffer state
     uint32_t dataCount;
     uint8_t tmpReadBuffer[5];
-    uint8_t tmpWriteBuffer[5];
+    uint8_t tmpWriteBuffer[5];   
     void (*InvalidOperationCallback)(DRV_HANDLE adsHandle, ADS_OPERATION_STATUS status); // CallBack calls on buffer overflow or incorrect response.
+    bool suspendReading;
     
 } ADSContext;
                            

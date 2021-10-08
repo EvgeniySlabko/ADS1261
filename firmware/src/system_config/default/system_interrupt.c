@@ -74,13 +74,14 @@ bool green = true;
 void __ISR(_EXTERNAL_2_VECTOR, IPL1AUTO) _IntHandlerExternalInterruptInstance0(void)
 {
     ADS_OPERATION_STATUS status = DRDYHandler(ads_handle);
+    RED = 1;
     if (status == ADS_COMPLETE)
     {
-        RED = 0;
+        //RED = 0;
     }
     else
     {
-        RED = 1;
+        //RED = 1;
     }
       
     PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_EXTERNAL_2);

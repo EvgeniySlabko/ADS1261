@@ -140,6 +140,24 @@ DRV_HANDLE Init_ADS1261(DRV_HANDLE spiHandle, volatile uint32_t *cs_lat_potr, vo
     return currentHandle;
 }
 
+void PauseReading(DRV_HANDLE adsHandle)
+{
+    ADSContext *context = (ADSContext *)adsHandle;
+    SYS_INT_Disable();
+    context->suspendReading = true;
+    SYS_INT_Enable();
+    TestForBusy(adsHandle); // wait until the read operation completes. 
+}
+
+void ContinueReading(DRV_HANDLE adsHandle)
+{
+    ADSContext *context = (ADSContext *)adsHandle;
+    TestForBusy(adsHandle);    
+    SYS_INT_Disable();
+    context->suspendReading = false;
+    SYS_INT_Enable();
+}
+
 void TransmitComplete(DRV_SPI_BUFFER_EVENT event, DRV_SPI_BUFFER_HANDLE bufferHandle, void * context )
 {
     ADSContext *adsContext = (ADSContext *) context;
@@ -156,8 +174,7 @@ ADS_OPERATION_STATUS WriteRegisterByte(DRV_HANDLE adsHandle, uint8_t address, ui
 {
     if (!VerifyHande(adsHandle)) return ADS_INVALID_HANDLE; 
     ADSContext *context = (ADSContext *)adsHandle;
-    TestForBusy(adsHandle);
-    stopReading = true;
+    PauseReading(adsHandle);
     
     UnSetCS(context);
 
@@ -170,9 +187,7 @@ ADS_OPERATION_STATUS WriteRegisterByte(DRV_HANDLE adsHandle, uint8_t address, ui
         return ADS_SPI_ERROR;
     }
     
-    TestForBusy(adsHandle);
-    stopReading = false;
-    
+    ContinueReading(adsHandle);
     return ADS_COMPLETE;
 }
 
@@ -181,10 +196,8 @@ ADS_OPERATION_STATUS ReadRegisterByte(DRV_HANDLE adsHandle, uint8_t address, uin
     if (!VerifyHande(adsHandle)) return ADS_INVALID_HANDLE; 
     
     ADSContext *context = (ADSContext *)adsHandle;
-    TestForBusy(adsHandle);
-    stopReading = true;
+    PauseReading(adsHandle);
     
-    //context->bufferHandle = DRV_SPI_BUFFER_EVENT_PROCESSING;
     UnSetCS(context);
     
     context->tmpWriteBuffer[0] = ADS_RREG + address;
@@ -197,8 +210,7 @@ ADS_OPERATION_STATUS ReadRegisterByte(DRV_HANDLE adsHandle, uint8_t address, uin
         return ADS_SPI_ERROR;
     }
     
-    TestForBusy(adsHandle);
-    stopReading = false;
+    ContinueReading(adsHandle);
     *data = context->tmpReadBuffer[2];
     return ADS_COMPLETE;
 }
@@ -208,7 +220,7 @@ ADS_OPERATION_STATUS Start(DRV_HANDLE adsHandle)
     if (!VerifyHande(adsHandle)) return ADS_INVALID_HANDLE; 
     ADSContext *context = (ADSContext *)adsHandle;
   
-    TestForBusy(adsHandle);
+    PauseReading(adsHandle);
 
     UnSetCS(context);
     context->tmpWriteBuffer[0] = ADS_START;
@@ -219,13 +231,16 @@ ADS_OPERATION_STATUS Start(DRV_HANDLE adsHandle)
     {
         return ADS_SPI_ERROR;
     }
+    
+    ContinueReading(adsHandle);
+    return ADS_COMPLETE;
 }
 
 ADS_OPERATION_STATUS Stop(DRV_HANDLE adsHandle)
 {
     if (!VerifyHande(adsHandle)) return ADS_INVALID_HANDLE; 
     ADSContext *context = (ADSContext *)adsHandle;
-    TestForBusy(adsHandle);
+    PauseReading(adsHandle);
     
     UnSetCS(context);
     context->tmpWriteBuffer[0] = ADS_STOP;
@@ -236,13 +251,16 @@ ADS_OPERATION_STATUS Stop(DRV_HANDLE adsHandle)
     {
         return ADS_SPI_ERROR;
     }
+    
+    ContinueReading(adsHandle);
+    return ADS_COMPLETE;
 }
 
 ADS_OPERATION_STATUS Reset(DRV_HANDLE adsHandle)
 { 
     if (!VerifyHande(adsHandle)) return ADS_INVALID_HANDLE; 
     ADSContext *context = (ADSContext *)adsHandle;
-    TestForBusy(adsHandle);
+    PauseReading(adsHandle);
     
     UnSetCS(context);
     context->tmpWriteBuffer[0] = ADS_RESET;
@@ -253,6 +271,9 @@ ADS_OPERATION_STATUS Reset(DRV_HANDLE adsHandle)
     {
         return ADS_SPI_ERROR;
     }
+    
+    ContinueReading(adsHandle);
+    return ADS_COMPLETE;
 }
 
 void ReadingComplete(DRV_SPI_BUFFER_EVENT event, DRV_SPI_BUFFER_HANDLE bufferHandle, void *context)
@@ -335,7 +356,7 @@ ADS_OPERATION_STATUS Unlock(DRV_HANDLE adsHandle)
     if(!VerifyHande(adsHandle)) return ADS_INVALID_HANDLE;
     ADSContext *context = (ADSContext *)adsHandle;
     
-    TestForBusy(adsHandle);
+    PauseReading(adsHandle);
                 
     UnSetCS(context);
     context->tmpWriteBuffer[0] = ADS_UNLOCK;
@@ -347,6 +368,7 @@ ADS_OPERATION_STATUS Unlock(DRV_HANDLE adsHandle)
         return ADS_SPI_ERROR;
     }
     
+    ContinueReading(adsHandle);
     return ADS_COMPLETE;
 }
 
@@ -354,11 +376,9 @@ ADS_OPERATION_STATUS OffsetSelfCalibration(DRV_HANDLE adsHandle)
 {
     if(!VerifyHande(adsHandle)) return ADS_INVALID_HANDLE;
     ADSContext *context = (ADSContext *)adsHandle;
-    stopReading = true;
-    TestForBusy(adsHandle);
+    PauseReading(adsHandle);
     
     Unlock(adsHandle);
-    TestForBusy(adsHandle);
     UnSetCS(context);
     
     context->tmpWriteBuffer[0] = ADS_SFOCAL;
@@ -370,11 +390,7 @@ ADS_OPERATION_STATUS OffsetSelfCalibration(DRV_HANDLE adsHandle)
         return ADS_SPI_ERROR;
     }
 
-    TestForBusy(adsHandle);
-    stopReading = true;
-    //DelayInMillisecond(1000);
-    stopReading = false;
-    
+    ContinueReading(adsHandle);
     return ADS_COMPLETE;
 }
 
@@ -382,26 +398,21 @@ ADS_OPERATION_STATUS GainCalibration(DRV_HANDLE adsHandle)
 {
     if(!VerifyHande(adsHandle)) return ADS_INVALID_HANDLE;
     ADSContext *context = (ADSContext *)adsHandle;
-    stopReading = true;
-    TestForBusy(adsHandle);
+    PauseReading(adsHandle);
+    
     Unlock(adsHandle);
-    TestForBusy(adsHandle);
     UnSetCS(context);
     
-    uint8_t response[2];
-    uint8_t query[2];
-    query[0] = 0x17;
-    query[1] = 0x00;
+    context->tmpWriteBuffer[0] = ADS_GANCAL;
+    context->tmpWriteBuffer[1] = ADS_NOP;
 
-    DRV_SPI_BUFFER_HANDLE bufferHandle = DRV_SPI_BufferAddWriteRead2(context->spiHandle, query, 2, response, 2, 0, 0, &(context->bufferHandle));
+    DRV_SPI_BUFFER_HANDLE bufferHandle = DRV_SPI_BufferAddWriteRead2(context->spiHandle, context->tmpWriteBuffer, 2, context->tmpReadBuffer, 2, 0, 0, &(context->bufferHandle));
     if (bufferHandle == DRV_SPI_BUFFER_HANDLE_INVALID)
     {
         return ADS_SPI_ERROR;
     }
 
-    TestForBusy(adsHandle);
-    stopReading = false;
-    
+    ContinueReading(adsHandle);
     return ADS_COMPLETE;
 }
 
@@ -418,16 +429,14 @@ ADS_OPERATION_STATUS SetOffset(DRV_HANDLE adsHandle, uint32_t subtractedValue)
 {
     if(!VerifyHande(adsHandle)) return ADS_INVALID_HANDLE;
     ADSContext *context = (ADSContext *)adsHandle;
+    
     context->adsInitData.ofScaleL = subtractedValue & 0xFF;
     subtractedValue >> 8;
     context->adsInitData.ofScaleM = subtractedValue & 0xFF;
     subtractedValue >> 8;
     context->adsInitData.ofScaleH = subtractedValue & 0xFF;
-    stopReading = true;
-    TestForBusy(adsHandle);
-    ConfigureDevice(adsHandle);
-    TestForBusy(adsHandle);
-    stopReading = false;
+        
+    ConfigureDevice(adsHandle);  
 }
 
 ADS_OPERATION_STATUS SetFScale(DRV_HANDLE adsHandle, uint32_t fScale)
@@ -439,23 +448,15 @@ ADS_OPERATION_STATUS SetFScale(DRV_HANDLE adsHandle, uint32_t fScale)
     context->adsInitData.fScaleM = fScale & 0xFF;
     fScale >> 8;
     context->adsInitData.fScaleH = fScale & 0xFF;
-    stopReading = true;
-    TestForBusy(adsHandle);
     ConfigureDevice(adsHandle);
-    TestForBusy(adsHandle);
-    stopReading = false;
 }
 
 ADS_OPERATION_STATUS SetGain(DRV_HANDLE adsHandle, unsigned gainValue)
 {
     if(!VerifyHande(adsHandle)) return ADS_INVALID_HANDLE;
     ADSContext *context = (ADSContext *)adsHandle;
-    stopReading = true;
-    TestForBusy(adsHandle);
     context->adsInitData.pga.gain = gainValue;
     ADS_OPERATION_STATUS result = ConfigureDevice(adsHandle);
-    TestForBusy(adsHandle);
-    stopReading = false;
     return result;
 }
 
@@ -463,18 +464,18 @@ ADS_OPERATION_STATUS SetDigitalFilter(DRV_HANDLE adsHandle, unsigned filter)
 {
     if(!VerifyHande(adsHandle)) return ADS_INVALID_HANDLE;
     ADSContext *context = (ADSContext *)adsHandle;
-    stopReading = true;
-    TestForBusy(adsHandle);
     context->adsInitData.mode0.filter = filter;
     ADS_OPERATION_STATUS result = ConfigureDevice(adsHandle);
-    TestForBusy(adsHandle);
-    stopReading = false;
     return result;
 }
 
 ADS_OPERATION_STATUS DRDYHandler(DRV_HANDLE adsHandle)
 {
-    if (stopReading) return ADS_BUSY;
+    
+    ADSContext *context = (ADSContext *)adsHandle;
+    
+    if (context->suspendReading) return;
+    
     return ReadData(adsHandle);
 }
 

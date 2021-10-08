@@ -81,9 +81,10 @@ uint8_t i = 0;
 uint8_t j = 0;
 uint8_t status;
 uint32_t calVal = 0;
-bool flag = false;
+volatile bool flag = false;
 uint32_t data;
 DRV_HANDLE ads_handle;
+
 volatile uint32_t fScaleVal = 0; 
 // *****************************************************************************
 // *****************************************************************************
@@ -126,12 +127,6 @@ void APP_Initialize ( void )
 
     appData.handleSPI0 = DRV_HANDLE_INVALID;
     
-    //DRV_HANDLE ADSHandle = GetInstance();
-    //Deinitialize(ADSHandle);
-            
-    /* TODO: Initialize your application's state machine and other
-     * parameters.
-     */
 }
 
 
@@ -148,13 +143,10 @@ void Button_Task()
     {
         if (true)
         {
-            //calVal += 10;
-            //SetFScale(ads_handle, calVal);
-            GainCalibration(ads_handle);
-            DelayInMillisecond(1000);
+            uint8_t reg;
+            ReadRegisterByte(ads_handle, ADS_MODE3_ADDR, &reg);
         }  
     }
-    
 }
 
 void OverflowCallback(DRV_HANDLE adsHandle, ADS_OPERATION_STATUS status)
@@ -164,7 +156,6 @@ void OverflowCallback(DRV_HANDLE adsHandle, ADS_OPERATION_STATUS status)
 
 void APP_Tasks ( void )
 {
-
     /* Check the application's current state. */
     switch ( appData.state )
     {
@@ -172,6 +163,7 @@ void APP_Tasks ( void )
         case APP_STATE_INIT:
         {
             bool appInitialized = true;
+            //RED = 1;
             
             if (DRV_HANDLE_INVALID == appData.handleSPI0)
             {
@@ -187,10 +179,11 @@ void APP_Tasks ( void )
                 appData.state = APP_STATE_SERVICE_TASKS;
             }
             
+            
             DelayInMillisecond(100);
             ads_handle = Init_ADS1261(appData.handleSPI0, &LATD, (uint32_t)0b1000000000000);
             SetInvalidResponseCallback(ads_handle, OverflowCallback);
-            initialize = true;
+            //initialize = true;
             //initialize = true;
             //SetOffset(ads_handle, 0x555555);
             
@@ -214,16 +207,19 @@ void APP_Tasks ( void )
         {
             //uint8_t data;
             //DelayInMillisecond();
-            Button_Task();
+            //RED = ~RED;
+            //Button_Task();
             
+            //ReadRegisterByte(ads_handle, ADS_MODE3_ADDR, &i);
             //ReadData(ads_handle);
             //uint8_t reg = ReadRegisterByte(ads_handle, OFCAL0_ADDR);
             //OffsetSelfCalibration(ads_handle);
             //ReadData(ads_handle);
             //ReadData(ads_handle);
             
-            uint32_t curData;
-            
+            DelayInMillisecond(100);
+            GREEN = ~GREEN;
+            uint32_t curData;        
             if (GetData(ads_handle, &curData))
             {
                 dataArr[j++] = curData;

@@ -67,18 +67,16 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // Section: Main Entry Point
 // *****************************************************************************
 // *****************************************************************************
-
 int main ( void )
 {
     /* Initialize all MPLAB Harmony modules, including application(s). */
     SYS_Initialize ( NULL );
-
-
     while ( true )
     {
+        LATCbits.LATC1 = 1;
         /* Maintain state machines of all polled MPLAB Harmony modules. */
-        SYS_Tasks ( );
-        
+        //SYS_Tasks ( );
+        //LATAbits.LATA5 = ~LATAbits.LATA5;
     }
 
     /* Execution should not come here during normal operation */

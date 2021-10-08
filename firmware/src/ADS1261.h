@@ -23,13 +23,16 @@ ADS_OPERATION_STATUS Reset(DRV_HANDLE adsHandle);
 ADS_OPERATION_STATUS ReadData(DRV_HANDLE adsHandle);
 ADS_OPERATION_STATUS SetOffset(DRV_HANDLE adsHandle, uint32_t offset);
 ADS_OPERATION_STATUS DRDYHandler(DRV_HANDLE adsHandle);
-void TestForBusy(DRV_HANDLE adsHandle);
 ADS_OPERATION_STATUS GainCalibration(DRV_HANDLE adsHandle);
-
 ADS_OPERATION_STATUS SetFScale(DRV_HANDLE adsHandle, uint32_t fScale);
 ADS_OPERATION_STATUS SetInvalidResponseCallback(DRV_HANDLE adsHandle, void (*InvalidResponseCallback)(DRV_HANDLE adsHandle, ADS_OPERATION_STATUS status));
- 
+
+
+void PauseReading(DRV_HANDLE adsHandle);
+void ContinueReading(DRV_HANDLE adsHandle);
+
 bool GetData(DRV_HANDLE adsHandle, uint32_t *data);
+void TestForBusy(DRV_HANDLE adsHandle);
 
 //GLx
 ADS_OPERATION_STATUS SetGain(DRV_HANDLE adsHandle, unsigned gainValue);
