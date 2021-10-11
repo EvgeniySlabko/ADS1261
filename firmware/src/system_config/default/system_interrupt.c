@@ -74,7 +74,6 @@ bool green = true;
 void __ISR(_EXTERNAL_2_VECTOR, IPL1AUTO) _IntHandlerExternalInterruptInstance0(void)
 {
     ADS_OPERATION_STATUS status = DRDYHandler(ads_handle);
-    RED = 1;
     if (status == ADS_COMPLETE)
     {
         //RED = 0;

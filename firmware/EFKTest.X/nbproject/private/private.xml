@@ -7,19 +7,14 @@
             <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/system_config/default/system_init.c</file>
             <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/ADSDriver.c</file>
             <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/system_config/default/system_tasks.c</file>
-            <file>file:/D:/microchip/harmony/v2_06/framework/peripheral/int/templates/int_VectorPriority_Default.h</file>
             <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/Delay.c</file>
+            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/main.c</file>
             <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/ADSDriver.h</file>
             <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/ADS_Status.h</file>
-            <file>file:/D:/microchip/harmony/v2_06/framework/peripheral/int/templates/int_SourceControl_Default.h</file>
-            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/ADSConfigurations.h</file>
-            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/main.c</file>
-            <file>file:/D:/microchip/harmony/v2_06/framework/peripheral/int/templates/int_VectorSelect_Default.h</file>
             <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/app.c</file>
             <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/system_config/default/system_interrupt.c</file>
-            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/app.h</file>
             <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/ADS1261.h</file>
-            <file>file:/D:/microchip/harmony/v2_06/framework/system/int/sys_int_mapping.h</file>
+            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/ADSConfigurations.h</file>
         </group>
     </open-files>
 </project-private>

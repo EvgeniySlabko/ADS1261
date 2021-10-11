@@ -76,7 +76,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 APP_DATA appData;
 bool initialize = false;
 uint32_t statusArray[256];
-uint32_t dataArr[300];
+uint32_t dataArr[256];
 uint8_t i = 0;
 uint8_t j = 0;
 uint8_t status;
@@ -163,8 +163,7 @@ void APP_Tasks ( void )
         case APP_STATE_INIT:
         {
             bool appInitialized = true;
-            //RED = 1;
-            
+
             if (DRV_HANDLE_INVALID == appData.handleSPI0)
             {
                 appData.handleSPI0 = DRV_SPI_Open(0, DRV_IO_INTENT_READWRITE);
@@ -183,42 +182,24 @@ void APP_Tasks ( void )
             DelayInMillisecond(100);
             ads_handle = Init_ADS1261(appData.handleSPI0, &LATD, (uint32_t)0b1000000000000);
             SetInvalidResponseCallback(ads_handle, OverflowCallback);
-            //initialize = true;
-            //initialize = true;
-            //SetOffset(ads_handle, 0x555555);
-            
-            //Unlock(ads_handle);
-            //DelayInMillisecond(100);
-            
-            //Stop(appData.handleSPI0);
-            //Reset(appData.handleSPI0);
-            //DelayInMillisecond(1000);
-            
-            //Init_ADS1261(appData.handleSPI0);
-
-            //DelayInMillisecond(1000);
-            
-            //Start(appData.handleSPI0);  
-            //Reset(ads_handle);
             break;
         }
 
         case APP_STATE_SERVICE_TASKS:
         {
-            //uint8_t data;
-            //DelayInMillisecond();
-            //RED = ~RED;
             //Button_Task();
-            
-            //ReadRegisterByte(ads_handle, ADS_MODE3_ADDR, &i);
-            //ReadData(ads_handle);
-            //uint8_t reg = ReadRegisterByte(ads_handle, OFCAL0_ADDR);
-            //OffsetSelfCalibration(ads_handle);
-            //ReadData(ads_handle);
-            //ReadData(ads_handle);
-            
-            DelayInMillisecond(100);
-            GREEN = ~GREEN;
+            if (!BUTTON)
+            {
+                if (true)
+                {
+                    uint8_t reg;
+                    ReadRegisterByte(ads_handle, ADS_MODE3_ADDR, &reg);
+                    
+                } 
+                break;
+            }
+
+            //DelayInMillisecond(100);
             uint32_t curData;        
             if (GetData(ads_handle, &curData))
             {

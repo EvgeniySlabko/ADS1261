@@ -17,25 +17,28 @@
 
 typedef struct ADSContext
 {
-    ADSInitData adsInitData;
-    DRV_HANDLE spiHandle;
-    uint32_t readBuffer[BUFFER_SIZE];
-    uint8_t readIndex;
-    uint8_t writeIndex;
-    volatile uint32_t *csPort;
-    uint32_t csPinMask;
-    DRV_SPI_BUFFER_EVENT bufferHandle;     //current buffer state
-    uint32_t dataCount;
-    uint8_t tmpReadBuffer[5];
-    uint8_t tmpWriteBuffer[5];   
-    void (*InvalidOperationCallback)(DRV_HANDLE adsHandle, ADS_OPERATION_STATUS status); // CallBack calls on buffer overflow or incorrect response.
-    bool suspendReading;
+    ADSInitData adsInitData;                    //divice configuration
+    DRV_HANDLE spiHandle;                       //
+    uint32_t readBuffer[BUFFER_SIZE];           // data buffer. 
+    uint8_t readIndex;                          // 
+    uint8_t writeIndex;                         //
+    volatile uint32_t *csPort;                  // LAT register for CS pin for spi 
+    uint32_t csPinMask;                         // mask for CS pin
+    DRV_SPI_BUFFER_EVENT bufferHandle;          //current spi buffer state. spi driver set DRV_SPI_BUFFER_EVENT_COMPLETE after finish of operation.
+    uint32_t dataCount;                         // unread data in the buffer
+    uint8_t tmpReadBuffer[5];                   // IO buffers
+    uint8_t tmpWriteBuffer[5];                  //
+    uint8_t missedPackets;
+    void (*InvalidOperationCallback)(DRV_HANDLE adsHandle, ADS_OPERATION_STATUS status); // CallBack called in the following cases:
+                                                                                         // -owerflof read buffer
+                                                                                         // -get invalid response
+                                                                                         
+    bool suspendReading;                                                                // suspend reading flag. nessesary for sunchronize read interrupt data and user messages such as set new configuration, calibration or read/write configuration registers
     
 } ADSContext;
                            
-ADSContext *instances[MAX_INSTANCES];
+ADSContext *instances[MAX_INSTANCES];       
 extern uint8_t instanceCount;
-extern DRV_HANDLE currentHandle;
 
 DRV_HANDLE GetInstance();
 void SetCS(ADSContext *context);

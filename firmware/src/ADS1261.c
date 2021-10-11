@@ -4,6 +4,7 @@
 #include "ADSDriver.h"
 
 DRV_HANDLE spiHandle;
+uint8_t dbgiter = 0;
 bool wasData = false;
 bool calibration = false;
 DRV_HANDLE Init_ADS1261(DRV_HANDLE spiHandle, volatile uint32_t *cs_lat_potr, volatile uint32_t cs_pin_mask)
@@ -155,6 +156,13 @@ void ContinueReading(DRV_HANDLE adsHandle)
     TestForBusy(adsHandle);    
     SYS_INT_Disable();
     context->suspendReading = false;
+    
+    if (context->missedPackets > 0)
+    {
+        context->missedPackets = 0;
+        ReadData(adsHandle);
+    }
+    
     SYS_INT_Enable();
 }
 
@@ -194,7 +202,6 @@ ADS_OPERATION_STATUS WriteRegisterByte(DRV_HANDLE adsHandle, uint8_t address, ui
 ADS_OPERATION_STATUS ReadRegisterByte(DRV_HANDLE adsHandle, uint8_t address, uint8_t *data)
 {
     if (!VerifyHande(adsHandle)) return ADS_INVALID_HANDLE; 
-    
     ADSContext *context = (ADSContext *)adsHandle;
     PauseReading(adsHandle);
     
@@ -286,8 +293,8 @@ void ReadingComplete(DRV_SPI_BUFFER_EVENT event, DRV_SPI_BUFFER_HANDLE bufferHan
     result = result << 8;
     result += adsContext->tmpReadBuffer[4];
     
-    //adsContext->readBuffer[adsContext->writeIndex] = dbgIter++;
-    adsContext->readBuffer[adsContext->writeIndex] = result;
+    adsContext->readBuffer[adsContext->writeIndex] = dbgiter++;
+    //adsContext->readBuffer[adsContext->writeIndex] = result;
     adsContext->writeIndex = (adsContext->writeIndex == BUFFER_SIZE - 1) ? 0 : adsContext->writeIndex + 1;    
     if (adsContext->dataCount == BUFFER_SIZE)
     {
@@ -307,7 +314,7 @@ ADS_OPERATION_STATUS ReadData(DRV_HANDLE adsHandle)
     if (!VerifyHande(adsHandle)) return ADS_INVALID_HANDLE; 
         
     ADSContext *context = (ADSContext *)adsHandle;
-    TestForBusy(adsHandle);
+    //PauseReading(adsHandle);
     
     UnSetCS(context);
     context->tmpWriteBuffer[0] = ADS_RDATA; // operation
@@ -323,6 +330,7 @@ ADS_OPERATION_STATUS ReadData(DRV_HANDLE adsHandle)
         return ADS_SPI_ERROR;
     }
     
+    //ContinueReading(adsHandle);
     return ADS_COMPLETE;
 }
 
@@ -471,11 +479,20 @@ ADS_OPERATION_STATUS SetDigitalFilter(DRV_HANDLE adsHandle, unsigned filter)
 
 ADS_OPERATION_STATUS DRDYHandler(DRV_HANDLE adsHandle)
 {
-    
+    if(!VerifyHande(adsHandle)) return ADS_INVALID_HANDLE;
     ADSContext *context = (ADSContext *)adsHandle;
+    if (context->suspendReading) 
+    {
+        if (context->missedPackets > 0)
+        {
+             context->InvalidOperationCallback((ADS_OPERATION_STATUS)context, ADS_MISSED_PACKET);
+        }
+        
+        context->missedPackets++;
+        return;
+    }
     
-    if (context->suspendReading) return;
-    
+    //context->missedPackets = 0;
     return ReadData(adsHandle);
 }
 
