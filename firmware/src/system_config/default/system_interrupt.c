@@ -73,7 +73,9 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 bool green = true;
 void __ISR(_EXTERNAL_2_VECTOR, IPL1AUTO) _IntHandlerExternalInterruptInstance0(void)
 {
+    //GREEN = ~GREEN;
     ADS_OPERATION_STATUS status = DRDYHandler(ads_handle);
+    
     if (status == ADS_COMPLETE)
     {
         //RED = 0;

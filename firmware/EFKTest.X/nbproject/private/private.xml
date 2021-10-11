@@ -8,13 +8,16 @@
             <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/ADSDriver.c</file>
             <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/system_config/default/system_tasks.c</file>
             <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/Delay.c</file>
-            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/main.c</file>
             <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/ADSDriver.h</file>
+            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/system_config/default/framework/driver/adc/drv_adc_static.h</file>
             <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/ADS_Status.h</file>
+            <file>file:/D:/microchip/harmony/v2_06/framework/driver/spi/src/dynamic/drv_spi.c</file>
+            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/ADSConfigurations.h</file>
+            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/main.c</file>
             <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/app.c</file>
             <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/system_config/default/system_interrupt.c</file>
+            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/app.h</file>
             <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/ADS1261.h</file>
-            <file>file:/D:/microchip/harmony/v2_06/apps/EFKTest/firmware/src/ADSConfigurations.h</file>
         </group>
     </open-files>
 </project-private>

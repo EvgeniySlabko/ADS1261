@@ -149,9 +149,14 @@ void Button_Task()
     }
 }
 
-void OverflowCallback(DRV_HANDLE adsHandle, ADS_OPERATION_STATUS status)
+void OverflowCallback(DRV_HANDLE adsHandle, ADS_CALLBACK_MESSAGE status)
 {
     if (status == ADS_BUFFER_OVERFLOW) RED = ~RED;
+}
+
+void DataHandler(DRV_HANDLE adsHandle)
+{
+   
 }
 
 void APP_Tasks ( void )
@@ -182,46 +187,18 @@ void APP_Tasks ( void )
             DelayInMillisecond(100);
             ads_handle = Init_ADS1261(appData.handleSPI0, &LATD, (uint32_t)0b1000000000000);
             SetInvalidResponseCallback(ads_handle, OverflowCallback);
+            SetDataHandler(ads_handle, DataHandler);
             break;
         }
 
         case APP_STATE_SERVICE_TASKS:
         {
-            //Button_Task();
-            if (!BUTTON)
+            uint32_t data;
+            if (GetData(ads_handle, &data))
             {
-                if (true)
-                {
-                    uint8_t reg;
-                    ReadRegisterByte(ads_handle, ADS_MODE3_ADDR, &reg);
-                    
-                } 
-                break;
-            }
-
-            //DelayInMillisecond(100);
-            uint32_t curData;        
-            if (GetData(ads_handle, &curData))
-            {
-                dataArr[j++] = curData;
                 GREEN = ~GREEN;
-            } 
-            
-            /*
-            fScaleVal = 0;
-            uint8_t reg;
-            ReadRegisterByte(ads_handle, ADS_FSCAL2_ADDR, &reg);
-            fScaleVal += reg;
-            fScaleVal = fScaleVal << 8;
-            ReadRegisterByte(ads_handle, ADS_FSCAL1_ADDR, &reg);
-            fScaleVal += reg;
-            fScaleVal = fScaleVal << 8;
-            ReadRegisterByte(ads_handle, ADS_FSCAL0_ADDR, &reg);
-            fScaleVal += reg;
-            
-            GREEN = 1;
-             */
-            
+                dataArr[j++] = data;
+            }
         }
         
         default:

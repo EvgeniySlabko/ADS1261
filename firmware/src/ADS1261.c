@@ -89,7 +89,11 @@ DRV_HANDLE Init_ADS1261(DRV_HANDLE spiHandle, volatile uint32_t *cs_lat_potr, vo
 
     context->adsInitData.mode1.chop = 0b11;
     // ADC Conversion Mode
-    context->adsInitData.mode1.convrt = 0b0; // 0: Continuous conversions (default)
+    //Select the ADC conversion mode.
+    //0: Continuous conversions (default)
+    //1: Pulse (one shot) conversion
+    // for pulse mode take START pin low (if uses command).
+    context->adsInitData.mode1.convrt = PUSLSE_CONVERSION_MODE; 
     // GPIO control. Set AN1 and AN2 as analog inputs
     context->adsInitData.mode2.gpio_con2 = 1;
     context->adsInitData.mode2.gpio_con3 = 1;
@@ -293,8 +297,8 @@ void ReadingComplete(DRV_SPI_BUFFER_EVENT event, DRV_SPI_BUFFER_HANDLE bufferHan
     result = result << 8;
     result += adsContext->tmpReadBuffer[4];
     
-    adsContext->readBuffer[adsContext->writeIndex] = dbgiter++;
-    //adsContext->readBuffer[adsContext->writeIndex] = result;
+    //adsContext->readBuffer[adsContext->writeIndex] = dbgiter++;
+    adsContext->readBuffer[adsContext->writeIndex] = result;
     adsContext->writeIndex = (adsContext->writeIndex == BUFFER_SIZE - 1) ? 0 : adsContext->writeIndex + 1;    
     if (adsContext->dataCount == BUFFER_SIZE)
     {
@@ -307,6 +311,7 @@ void ReadingComplete(DRV_SPI_BUFFER_EVENT event, DRV_SPI_BUFFER_HANDLE bufferHan
     }
     
     TransmitComplete(event, bufferHandle, context);
+    if (adsContext->DataHandler != 0) adsContext->DataHandler((DRV_HANDLE)context);
 }
 
 ADS_OPERATION_STATUS ReadData(DRV_HANDLE adsHandle)
@@ -339,6 +344,7 @@ ADS_OPERATION_STATUS ConfigureDevice(DRV_HANDLE adsHandle)
     if(!VerifyHande(adsHandle)) return ADS_INVALID_HANDLE;
     ADSContext *context = (ADSContext *)adsHandle;
     ADS_OPERATION_STATUS status = ADS_COMPLETE;
+    status &= Stop(adsHandle);
     status &= WriteRegisterByte(adsHandle, ADS_MODE0_ADDR, *(uint8_t*) &(context->adsInitData.mode0));
     status &= WriteRegisterByte(adsHandle, ADS_MODE2_ADDR, *(uint8_t*) &(context->adsInitData.mode2));
     status &= WriteRegisterByte(adsHandle, ADS_REF_ADDR, *(uint8_t*) &(context->adsInitData.ref));
@@ -353,7 +359,7 @@ ADS_OPERATION_STATUS ConfigureDevice(DRV_HANDLE adsHandle)
     status &= WriteRegisterByte(adsHandle, ADS_FSCAL0_ADDR, context->adsInitData.fScaleL);
     status &= WriteRegisterByte(adsHandle, ADS_FSCAL1_ADDR, context->adsInitData.fScaleM);
     status &= WriteRegisterByte(adsHandle, ADS_OFCAL2_ADDR, context->adsInitData.fScaleH);
-    
+    status &= Start(adsHandle);
     if (status != ADS_COMPLETE) return ADS_CONFIGURATION_ERRROR;
     
     return ADS_COMPLETE;
@@ -481,7 +487,7 @@ ADS_OPERATION_STATUS DRDYHandler(DRV_HANDLE adsHandle)
 {
     if(!VerifyHande(adsHandle)) return ADS_INVALID_HANDLE;
     ADSContext *context = (ADSContext *)adsHandle;
-    if (context->suspendReading) 
+    if (!IS_PULSE_CONVERSION_MODE(adsHandle) && context->suspendReading) 
     {
         if (context->missedPackets > 0)
         {
@@ -519,10 +525,27 @@ bool GetData(DRV_HANDLE adsHandle, uint32_t *data)
     return true;
 }
 
-ADS_OPERATION_STATUS SetInvalidResponseCallback(DRV_HANDLE adsHandle, void (*InvalidResponseCallback)(DRV_HANDLE adsHandle, ADS_OPERATION_STATUS status))
+ADS_OPERATION_STATUS SetConversionMode(DRV_HANDLE adsHandle, unsigned mode)
+{
+    if(!VerifyHande(adsHandle)) return ADS_INVALID_HANDLE;
+    ADSContext *context = (ADSContext *)adsHandle;
+    context->adsInitData.mode1.convrt = mode;
+    ADS_OPERATION_STATUS result = ConfigureDevice(adsHandle);
+    return result;
+}
+
+ADS_OPERATION_STATUS SetInvalidResponseCallback(DRV_HANDLE adsHandle, void (*InvalidResponseCallback)(DRV_HANDLE adsHandle, ADS_CALLBACK_MESSAGE status))
 {
     if(!VerifyHande(adsHandle)) return ADS_INVALID_HANDLE;
     ADSContext *context = (ADSContext *)adsHandle;
     context->InvalidOperationCallback = InvalidResponseCallback;
+    return ADS_COMPLETE;
+}
+
+ADS_OPERATION_STATUS SetDataHandler(DRV_HANDLE adsHandle, void (*DataHandler)(DRV_HANDLE adsHandle))
+{
+    if(!VerifyHande(adsHandle)) return ADS_INVALID_HANDLE;
+    ADSContext *context = (ADSContext *)adsHandle;
+    context->DataHandler = DataHandler;
     return ADS_COMPLETE;
 }

@@ -15,6 +15,8 @@
 #define MAX_INSTANCES 5
 #define BUFFER_SIZE 20
 
+#define IS_PULSE_CONVERSION_MODE(adsHnadle) (((ADSContext *)adsHandle)->adsInitData.mode1.convrt == 0b1)
+
 typedef struct ADSContext
 {
     ADSInitData adsInitData;                    //divice configuration
@@ -28,12 +30,13 @@ typedef struct ADSContext
     uint32_t dataCount;                         // unread data in the buffer
     uint8_t tmpReadBuffer[5];                   // IO buffers
     uint8_t tmpWriteBuffer[5];                  //
-    uint8_t missedPackets;
-    void (*InvalidOperationCallback)(DRV_HANDLE adsHandle, ADS_OPERATION_STATUS status); // CallBack called in the following cases:
+    uint8_t missedPackets;                      //number of missed packets
+    void (*InvalidOperationCallback)(DRV_HANDLE adsHandle, ADS_CALLBACK_MESSAGE status); // CallBack called in the following cases:
                                                                                          // -owerflof read buffer
                                                                                          // -get invalid response
-                                                                                         
-    bool suspendReading;                                                                // suspend reading flag. nessesary for sunchronize read interrupt data and user messages such as set new configuration, calibration or read/write configuration registers
+    
+    void (*DataHandler) (DRV_HANDLE adsHandle);                                          // Data received. You can read it from buffer.
+    bool suspendReading;                                                                 // suspend reading flag. nessesary for sunchronize read interrupt data and user messages such as set new configuration, calibration or read/write configuration registers
     
 } ADSContext;
                            

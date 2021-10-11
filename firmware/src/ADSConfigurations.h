@@ -130,6 +130,8 @@ typedef struct ADSInitData
     
 } ADSInitData;
 
+// Configurations.
+
 //DataRate
 #define DR1 0b00000  // 2.5 SPS
 #define DR2 0b00001  // 5 SPS
@@ -181,6 +183,11 @@ typedef struct ADSInitData
 #define GL6 0b101   //: 32
 #define GL7 0b110   //: 64
 #define GL8 0b111   //: 128
+
+// Conversion mode
+#define CONTINUOUS_CONVERSION_MODE       0b0    //0: Continuous conversions (default)
+#define PUSLSE_CONVERSION_MODE           0b1    //1: Pulse (one shot) conversion
+
 
 
 #endif	/* CONFIGURATIONS_H */
